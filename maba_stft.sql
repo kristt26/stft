@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.4.17-MariaDB)
-# Date: 2021-07-30 07:55:24
+# Date: 2021-07-31 15:00:49
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -39,7 +39,7 @@ CREATE TABLE `berita` (
 # Data for table "berita"
 #
 
-INSERT INTO `berita` VALUES ('B-001','BEM STFT Fajar Timur periode 2021/2022 Terpilih di lantik','<p>fdrdtrdt ftfytf g r ft  y ft   </p>','2021-07-13','berita2.jpg'),('B-002','afdasdf','<p>asdfasdfasdfa</p>','2021-07-30','Taman_Alam_Sorong.jpg');
+INSERT INTO `berita` VALUES ('B-001','BEM STFT Fajar Timur periode 2021/2022 Terpilih di lantik','<p>fdrdtrdt ftfytf g r ft  y ft   </p>','2021-07-13','berita2.jpg');
 
 #
 # Structure for table "data_diri"
@@ -70,7 +70,6 @@ CREATE TABLE `data_diri` (
 # Data for table "data_diri"
 #
 
-INSERT INTO `data_diri` VALUES ('CM-001-19','Demian','asti','asti','gddh','2021-07-16','perempuan','775656565','K-02','ktp.jpg','kk.jpg','surat_baptis.jpg','iajzah.jpg','valid','T-2019-1','G-1'),('CM-002-19','Roki','roki','roki','Abepura','2021-07-20','laki-laki','5757676776','K-02','ktp2.jpg','kk2.jpg','surat_baptis2.jpg','iajzah2.jpg','valid','T-2019-1','G-1'),('CM-003-19','Andre','joki','joki','jayapura','2021-07-20','laki-laki','75586868','K-02','ktp3.jpg','kk3.jpg','surat_baptis3.jpg','iajzah3.jpg','valid','T-2019-1','G-1'),('CM-004-19','Alberto','sepnat','sepnat','biak','2021-07-22','laki-laki','765567888','K-01','ktp4.jpg','kk4.jpg','surat_baptis4.jpg','iajzah4.jpg','valid','T-2019-1','G-1'),('CM-005-19','Fany','fani','fani','Timika','2021-07-13','perempuan','081345653422','K-02','ktp5.jpg','kk5.jpg','surat_baptis5.jpg','iajzah5.jpg','','T-2019-1','G-1'),('CM-006-19','Candra Putra','candra26','admin','Arso','1995-02-20','laki-laki','082238281801','K-03','tugas_perangkat_keras8.PNG','tugas_perangkat_keras9.PNG','tugas_perangkat_keras10.PNG','tugas_perangkat_keras11.PNG','','T-2019-1','G-1');
 
 #
 # Structure for table "dosen"
@@ -124,7 +123,7 @@ CREATE TABLE `hasil_ujian` (
 # Data for table "hasil_ujian"
 #
 
-INSERT INTO `hasil_ujian` VALUES ('HU-001','CM-001-19','U-1',60),('HU-002','CM-002-19','U-1',60),('HU-003','CM-003-19','U-1',50),('HU-004','CM-003-19','U-2',60),('HU-005','CM-006-19','U-1',65);
+INSERT INTO `hasil_ujian` VALUES ('HU-001','CM-001-19','U-1',60),('HU-002','CM-002-19','U-1',60),('HU-003','CM-003-19','U-1',50),('HU-004','CM-003-19','U-2',60),('HU-005','CM-006-19','U-1',60),('HU-006','CM-007-19','U-1',65);
 
 #
 # Structure for table "jadwal"
@@ -148,7 +147,6 @@ CREATE TABLE `jadwal` (
 # Data for table "jadwal"
 #
 
-INSERT INTO `jadwal` VALUES ('J-01','U-1','03:50:00','05:05:00','2021-07-30','G-1','','T-2019-1',NULL),('J-03','U-2','04:30:00','06:30:00','2021-07-30','G-1','','T-2019-1',NULL);
 
 #
 # Structure for table "jawaban"
@@ -161,13 +159,12 @@ CREATE TABLE `jawaban` (
   `kd_soal_valid` varchar(5) NOT NULL,
   `jawaban` text NOT NULL,
   PRIMARY KEY (`kd_jawaban`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "jawaban"
 #
 
-INSERT INTO `jawaban` VALUES (1,'CM-002-19','SV-01','54545'),(2,'CM-002-19','SV-02','6464'),(3,'CM-001-19','SV-01','64646'),(4,'CM-001-19','SV-02','4343'),(5,'CM-003-19','SV-01','434343'),(6,'CM-003-19','SV-02','544433'),(7,'CM-003-19','SV-03','ddsa'),(8,'CM-003-19','SV-04','dsad'),(9,'CM-003-19','SV-05','asdas'),(10,'CM-003-19','SV-06','assas'),(11,'CM-001-19','SV-03','Frasa atau frase adalah sebuah makanan linguistik. Lebih tepatnya, frasa merupakan satuan linguistik yang lebih besar dari kata dan lebih kecil dari klausa dan kalimat. Frasa adalah kumpulan kata nonpredikatif. Artinya frasa tidak memiliki predikat dalam strukturnya. Itu yang membedakan frasa dari klausa dan kalimat.'),(12,'CM-001-19','SV-04','gigi+er = gerigi'),(13,'CM-001-19','SV-05','Kata dasar adalah kata yang ditulis sebagai satu kesatuan sedangkan kata turunan sering disebut juga sebagai kata berimbuhan.\r\nKata berimbuhan adalah kata dasar yang telah mendapatkan imbuhan baik itu awalan, akhiran, sisipan, maupun awalan dan akhiran.'),(14,'CM-001-19','SV-06','Huruf miring dalam cetakan dipakai untuk menuliskan nama buku, majalah, dan surat kabar yang dikutip dalam tulisan.'),(15,'CM-006-19','SV-01','1231'),(16,'CM-006-19','SV-02','321231');
 
 #
 # Structure for table "soal_tes"
