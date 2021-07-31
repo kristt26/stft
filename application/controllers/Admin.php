@@ -4,6 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('Mylib');
+    }
 
     public function index()
     {
@@ -286,10 +291,10 @@ class Admin extends CI_Controller
                 echo "Foto Berita Gagal di Upload!";
             } else {
                 $data['foto'] = $this->upload->data('file_name');
-                $this->db->update('dosen', $data, ['id'=>$id]);
+                $this->db->update('dosen', $data, ['id' => $id]);
             }
         } else {
-            $this->db->update('dosen', $data, ['id'=>$id]);
+            $this->db->update('dosen', $data, ['id' => $id]);
             redirect('admin/berita');
         }
         $this->session->set_flashdata('flash', 'Berhasil diubah');
@@ -298,7 +303,6 @@ class Admin extends CI_Controller
 
     public function dosen_hapus($id)
     {
-
         $item = $this->db->query("SELECT * FROM dosen WHERE id = '$id'")->row_array();
         $target_file = './assets/img/dosen/' . $item->gambar;
         unlink($target_file);
@@ -311,7 +315,7 @@ class Admin extends CI_Controller
 
 
 
-    
+
 
 
 
@@ -1068,6 +1072,7 @@ class Admin extends CI_Controller
             $this->load->view('templates/admin/footer');
         } else {
             $post = $this->input->post();
+            $maba = $this->db->get_where("data_diri", ['kd_tahun_ajaran'=>$post['kd_tahun_ajaran'], 'kd_gelombang'=>$post['kd_gelombang']])->result_array();
             $data = [
                 "kd_jadwal" => $post['kd_jadwal'],
                 "kd_ujian" => $post['kd_ujian'],
@@ -1077,8 +1082,13 @@ class Admin extends CI_Controller
                 "kd_gelombang" => $post['kd_gelombang'],
                 "kd_tahun_ajaran" => $post['kd_tahun_ajaran']
             ];
-
-            $this->db->insert('jadwal', $data);
+            $result = $this->db->insert('jadwal', $data);
+            if($result){
+                $ujian = $this->db->get_where("ujian", ['kd_ujian'=>$post['kd_ujian']])->row_array();
+                foreach ($maba as $key => $value) {
+                    $this->mylib->rest_kirim($value['no_hp'], "Jadwal Ujian\n"."Ujian: ".$ujian['nama_ujian']."\nTanggal: ".$post['tanggal']."\nJam: ".$post['jam_mulai']."s/d".$post['jam_selesai']);
+                }
+            }
             $this->session->set_flashdata('success', 'Berhasil ditambahkan');
             redirect('admin/jadwal_data', 'refresh');
         }
@@ -1263,7 +1273,7 @@ class Admin extends CI_Controller
 
     public function proses_validasi($id = null, $status = null)
     {
-
+        $maba = $this->db->get_where('data_diri', ['kd_maba' => $id])->row_array();
         if ($id != null & $status != null) {
             if ($status == 'no') {
 
@@ -1272,7 +1282,11 @@ class Admin extends CI_Controller
                 ];
 
                 $this->db->where('kd_maba', $id);
-                $this->db->update('data_diri', $data);
+                $result = $this->db->update('data_diri', $data);
+
+                if ($result) {
+                    $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran Tidak Valid");
+                }
                 redirect('admin/calon_maba');
             } else {
                 $data = [
@@ -1280,7 +1294,10 @@ class Admin extends CI_Controller
                 ];
 
                 $this->db->where('kd_maba', $id);
-                $this->db->update('data_diri', $data);
+                $result = $this->db->update('data_diri', $data);
+                if ($result) {
+                    $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran anda telah di periksa dan Valid");
+                }
                 redirect('admin/calon_maba');
             }
         }

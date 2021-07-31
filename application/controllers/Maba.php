@@ -8,6 +8,8 @@ class Maba extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->library('Mylib');
+    
     date_default_timezone_set("Asia/Jayapura");
   }
   
@@ -166,7 +168,10 @@ class Maba extends CI_Controller
       //  print'<pre>';
       //  print_r($data); die;
       $this->db->where('kd_maba', $post['kd_maba']);
-      $this->db->update('data_diri', $data);
+      $result = $this->db->update('data_diri', $data);
+      if($result){
+        $this->mylib->rest_kirim($data['no_hp'], "No. Pendaftaran Anda: ".$data['kd_maba']);
+      }
       redirect('maba/daftar');
     }
   }
