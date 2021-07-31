@@ -85,7 +85,7 @@ class Maba extends CI_Controller
       if ($ktp = '') {
       } else {
         $config['upload_path'] = './assets/img/berkas';
-        $config['max_size']= 5000;
+        $config['max_size']= 2000;
         $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
@@ -102,7 +102,7 @@ class Maba extends CI_Controller
       if ($kartu_keluarga = '') {
       } else {
         $config['upload_path'] = './assets/img/berkas';
-        $config['max_size']= 5000;
+        $config['max_size']= 2000;
         $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
@@ -120,7 +120,7 @@ class Maba extends CI_Controller
       if ($surat_baptis = '') {
       } else {
         $config['upload_path'] = './assets/img/berkas';
-        $config['max_size']= 5000;
+        $config['max_size']= 2000;
         $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
@@ -137,7 +137,7 @@ class Maba extends CI_Controller
       if ($ijazah = '') {
       } else {
         $config['upload_path'] = './assets/img/berkas';
-        $config['max_size']= 5000;
+        $config['max_size']= 2000;
         $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
