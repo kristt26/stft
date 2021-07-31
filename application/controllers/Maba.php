@@ -86,11 +86,11 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        // $config['allowed_types'] = 'jpg|png|pdf';
+        $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('ktp')) {
-          echo "Upload ktp Gagal";
+          echo $this->upload->display_errors();
           die();
         } else {
           $ktp = $this->upload->data('file_name');
@@ -103,7 +103,7 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        // $config['allowed_types'] = 'jpg|png|pdf';
+        $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         
@@ -121,7 +121,7 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        // $config['allowed_types'] = 'jpg|png|pdf';
+        $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('surat_baptis')) {
@@ -138,7 +138,7 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        // $config['allowed_types'] = 'jpg|png|pdf';
+        $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('ijazah')) {
@@ -159,7 +159,7 @@ class Maba extends CI_Controller
 
       $data = [
         "kd_maba" => $post['kd_maba'],
-        //  "id_login" => $post['id_login'],
+         "id_login" => $post['id_login'],
         "nama" => $post['nama'],
         "tempat_lahir" => $post['tempat_lahir'],
         "tanggal_lahir" => $post['tanggal_lahir'],
