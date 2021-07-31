@@ -86,11 +86,11 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        $config['allowed_types'] = 'jpg|png|pdf';
+        // $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('ktp')) {
-          echo "Upload Gagal";
+          echo "Upload ktp Gagal";
           die();
         } else {
           $ktp = $this->upload->data('file_name');
@@ -103,12 +103,12 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        $config['allowed_types'] = 'jpg|png|pdf';
+        // $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         
         if (!$this->upload->do_upload('kartu_keluarga')) {
-          echo "Upload Gagal";
+          echo "Upload kartu_keluarga Gagal";
           die();
         } else {
           $kartu_keluarga = $this->upload->data('file_name');
@@ -121,11 +121,11 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        $config['allowed_types'] = 'jpg|png|pdf';
+        // $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('surat_baptis')) {
-          echo "Upload Gagal";
+          echo "Upload surat_baptis Gagal";
           die();
         } else {
           $surat_baptis = $this->upload->data('file_name');
@@ -138,11 +138,11 @@ class Maba extends CI_Controller
       } else {
         $config['upload_path'] = './assets/img/berkas';
         $config['max_size']= 5000;
-        $config['allowed_types'] = 'jpg|png|pdf';
+        // $config['allowed_types'] = 'jpg|png|pdf';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('ijazah')) {
-          echo "Upload Gagal";
+          echo "Upload ijazah Gagal";
           die();
         } else {
           $ijazah = $this->upload->data('file_name');
