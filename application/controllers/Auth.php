@@ -85,7 +85,7 @@ class Auth extends CI_Controller {
             $data['kodeTahun'] = $this->Maba_model->kodeTahun();
 
             $dariDB = $this->Auth_model->LoginOtomatis();
-            $nourut = substr($dariDB, 3, 4);
+            $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 4);
             
             error_reporting(0);
             $idsekarang = $nourut + 1;
