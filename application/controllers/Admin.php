@@ -852,7 +852,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
 
             $dariDB = $this->Admin_model->SoalOtomatis();
-            $nourut = substr($dariDB, 3, 4);
+            $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 4);
 
 
             $idsekarang = $nourut + 1;
