@@ -25,8 +25,8 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-tambah-ujian" data-flashujian="<?= $this->session->flashdata('flash'); ?>"></div>
-        <div class="flash-ubah-ujian" data-ubhujian="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-tambah-ujian" data-flashujian="<?= $this->session->flashdata('flash'); ?>"></div>
+        <div class="flash-ubah-ujian" data-ubhujian="<?= $this->session->flashdata('flash'); ?>"></div> -->
        
           
        

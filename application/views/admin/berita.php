@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-save-berita" data-flashberita="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-save-berita" data-flashberita="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
         <a href="<?= site_url('admin/berita_tambah'); ?>" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Tambah Data</a>
         <br><br>

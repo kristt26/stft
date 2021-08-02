@@ -24,9 +24,9 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-tambah-tahun" data-flashthn="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-tambah-tahun" data-flashthn="<?= $this->session->flashdata('flash'); ?>"></div>
         
-        <div class="flash-ubah-tahun" data-ubhThn="<?= $this->session->flashdata('flash'); ?>"></div>
+        <div class="flash-ubah-tahun" data-ubhThn="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
           
        

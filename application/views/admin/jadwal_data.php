@@ -25,9 +25,9 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-save-jadwal" data-flashjadwal="<?= $this->session->flashdata('success'); ?>"></div>
+        <!-- <div class="flash-save-jadwal" data-flashjadwal="<?= $this->session->flashdata('success'); ?>"></div> -->
         
-        <div class="flash-ubah-jadwal" data-ubhjadwal="<?= $this->session->flashdata('success'); ?>"></div>
+        <!-- <div class="flash-ubah-jadwal" data-ubhjadwal="<?= $this->session->flashdata('success'); ?>"></div> -->
         
           
        

@@ -26,9 +26,9 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-save-soal" data-flashsoal="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-save-soal" data-flashsoal="<?= $this->session->flashdata('flash'); ?>"></div>
         
-        <div class="flash-ubah-soal" data-ubhsoal="<?= $this->session->flashdata('flash'); ?>"></div>
+        <div class="flash-ubah-soal" data-ubhsoal="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
           
        

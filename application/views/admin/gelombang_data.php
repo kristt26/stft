@@ -26,9 +26,9 @@
       <div class="row">
         <div class="col-12">
 
-        <div class="flash-save-gel" data-flashtmbhgel="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-save-gel" data-flashtmbhgel="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
-        <div class="flash-ubah-gel" data-ubhGel="<?= $this->session->flashdata('flash'); ?>"></div>
+        <!-- <div class="flash-ubah-gel" data-ubhGel="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
           
        
