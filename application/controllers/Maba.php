@@ -159,7 +159,7 @@ class Maba extends CI_Controller
 
       $data = [
         "kd_maba" => $post['kd_maba'],
-        //  "id_login" => $post['id_login'],
+        //  "id_login" => $post['id_login'],   
         "nama" => $post['nama'],
         "tempat_lahir" => $post['tempat_lahir'],
         "tanggal_lahir" => $post['tanggal_lahir'],

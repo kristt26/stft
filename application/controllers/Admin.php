@@ -8,10 +8,11 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('Mylib');
+        date_default_timezone_set("Asia/Jayapura");
     }
 
     public function index()
-    {
+    {   
         $data['jumlahKeuskupan'] = $this->Admin_model->jumlahKeuskupan();
         $data['jumlahUjian'] = $this->Admin_model->jumlahUjian();
         $data['jumlahGelombang'] = $this->Admin_model->jumlahGelombang();

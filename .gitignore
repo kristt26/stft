@@ -30,4 +30,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 .vscode/*
-assets/img/*
+assets/img/berkas/*
+assets/img/dosen/*
+assets/img/maba/*
