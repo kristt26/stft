@@ -209,6 +209,7 @@ class Maba extends CI_Controller
     $this->db->where('kd_maba', $user);
     $query = $this->db->get()->result_array();
     $data['jam'] = date("G:i:s");
+    $data['tanggalsistem'] = new DateTime(date("Y-m-d G:i:s"));
 
     //jika status berkas valid maka tampilkan jadwal ujian
     // error_reporting(0);

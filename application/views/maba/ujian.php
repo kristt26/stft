@@ -71,6 +71,9 @@
                       } else { ?> -->
 
                 <?php foreach ($jadwal as $jd) : 
+                $waktumulai = new DateTime($jd['tanggal'] . " ". $jd['jam_mulai']);
+                $waktuselesai = new DateTime($jd['tanggal'] . " ". $jd['jam_selesai']);
+                $status = $waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem;
                   $gelombang = $jd['kd_gelombang'];
                   $ta = $jd['kd_tahun_ajaran'];
                   $kd_maba = $jd['kd_maba'];
@@ -94,7 +97,7 @@
                     <td><?= $jd['jam_selesai'] ?></td>
                     <td class="text-center">
                       <?php if ($db == null) { ?>
-                        <a href="<?= site_url('maba/mulai_ujian/') . $jd['kd_ujian'] . '/' . $NoTes['kd_maba'] . '/' .$jd['kd_gelombang']. '/' .$jd['kd_tahun_ajaran'] ; ?>" class="btn btn-<?= ($jd['jam_mulai'] < $jam && $jd['jam_selesai'] > $jam) ? 'primary' : 'secondary' ?> btn-sm <?= ($jd['jam_mulai'] < $jam && $jd['jam_selesai'] > $jam) ? '' : 'disabled' ?>"><i class="fas fa-edit"></i> <?= ($jd['jam_mulai'] < $jam && $jd['jam_selesai'] > $jam) ? 'Mulai Ujian' : ($jd['jam_selesai'] < $jam ? 'Ujian Telah Lewat' : 'Belum di Mulai') ?></a>
+                        <a href="<?= site_url('maba/mulai_ujian/') . $jd['kd_ujian'] . '/' . $NoTes['kd_maba'] . '/' .$jd['kd_gelombang']. '/' .$jd['kd_tahun_ajaran'] ; ?>" class="btn btn-<?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'primary' : 'secondary' ?> btn-sm <?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? '' : 'disabled' ?>"><i class="fas fa-edit"></i> <?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'Mulai Ujian' : ($waktuselesai < $tanggalsistem ? 'Ujian Telah Lewat' : 'Belum di Mulai') ?></a>
                       <?php } else { ?>
                         <button class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ujian telah diikuti</button>
                       <?php } ?>
