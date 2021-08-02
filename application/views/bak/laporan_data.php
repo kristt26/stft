@@ -31,8 +31,8 @@
         
           
        
-        <?= $this->session->flashdata('message');?>
-        <br><br>
+        <!-- <?= $this->session->flashdata('message');?>
+        <br><br> -->
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Hasil Tes Peserta</h3>

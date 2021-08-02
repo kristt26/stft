@@ -33,8 +33,8 @@
           
 
 
-       <?php $kd_soal_valid = 'SV-'.sprintf("%02s", $kd_soal_valid);  ?>
-        <?= $this->session->flashdata('message');?>
+       <!-- <?php $kd_soal_valid = 'SV-'.sprintf("%02s", $kd_soal_valid);  ?>
+        <?= $this->session->flashdata('message');?> -->
         <br><br>
         <?php foreach($soal as $vasol => $data) : ?>  
           <div class="card">

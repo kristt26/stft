@@ -208,7 +208,7 @@ class Maba extends CI_Controller
     // $this->db->join('jadwal','jadwal.kd_maba=data_diri.kd_maba');
     $this->db->where('kd_maba', $user);
     $query = $this->db->get()->result_array();
-    $data['jam'] = date("h:i:s");
+    $data['jam'] = date("G:i:s");
 
     //jika status berkas valid maka tampilkan jadwal ujian
     // error_reporting(0);
