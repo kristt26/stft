@@ -76,7 +76,8 @@
                 $status = $waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem;
                   $gelombang = $jd['kd_gelombang'];
                   $ta = $jd['kd_tahun_ajaran'];
-                  $kd_maba = $jd['kd_maba'];
+                  $kd_maba = $user['kd_maba'];
+                  $kd_ujian = $jd['kd_ujian'];
                   $db = $this->db->query("SELECT
                     *
                   FROM
@@ -87,7 +88,7 @@
                       `soal_tes`.`kd_soal_tes` = `validasi_soal_tes`.`kd_soal_tes`
                     LEFT JOIN `ujian` ON `soal_tes`.`kd_ujian` = `ujian`.`kd_ujian`
                     LEFT JOIN `jadwal` ON `jadwal`.`kd_ujian` = `ujian`.`kd_ujian`
-                  WHERE jadwal.kd_gelombang = '$gelombang' AND jadwal.kd_tahun_ajaran = '$ta' AND jawaban.kd_maba = '$kd_maba'")->result_array();
+                  WHERE jadwal.kd_gelombang = '$gelombang' AND jadwal.kd_tahun_ajaran = '$ta' AND jawaban.kd_maba = '$kd_maba' AND ujian.kd_ujian = '$kd_ujian'")->result_array();
                   ?>
                   <tr>
                     <td><?= $no++; ?></td>
@@ -99,7 +100,7 @@
                       <?php if ($db == null) { ?>
                         <a href="<?= site_url('maba/mulai_ujian/') . $jd['kd_ujian'] . '/' . $NoTes['kd_maba'] . '/' .$jd['kd_gelombang']. '/' .$jd['kd_tahun_ajaran'] ; ?>" class="btn btn-<?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'primary' : 'secondary' ?> btn-sm <?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? '' : 'disabled' ?>"><i class="fas fa-edit"></i> <?= ($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'Mulai Ujian' : ($waktuselesai < $tanggalsistem ? 'Ujian Telah Lewat' : 'Belum di Mulai') ?></a>
                       <?php } else { ?>
-                        <button class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ujian telah diikuti</button>
+                        <button class="btn btn-success btn-sm disabled"><i class="fas fa-check"></i> Ujian telah diikuti</button>
                       <?php } ?>
 
                     </td>

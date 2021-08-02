@@ -552,7 +552,7 @@ class Admin extends CI_Controller
             $data['tahunTerakhir'] = $this->Admin_model->tahunTerakhir();
 
             $dariDB = $this->Admin_model->TahunOtomatis();
-            $nourut = substr($dariDB, 2, 4);
+            $nourut = is_null($dariDB) ? 0 : substr($dariDB, 2, 4);
 
 
             $idsekarang = $nourut + 1;
@@ -584,12 +584,12 @@ class Admin extends CI_Controller
 
             $this->db->insert('tahun_ajaran', $thn);
 
-            $thn2 = [
-                "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-2',
-                "tahun_ajaran" => $post['tahun_ajaran']
-            ];
+            // $thn2 = [
+            //     "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-2',
+            //     "tahun_ajaran" => $post['tahun_ajaran']
+            // ];
 
-            $this->db->insert('tahun_ajaran', $thn2);
+            // $this->db->insert('tahun_ajaran', $thn2);
 
             // print'<pre>';
             // var_dump($thn);
@@ -1217,7 +1217,7 @@ class Admin extends CI_Controller
         $data['kd_ujian'] = $id;
 
         $dariDB = $this->Admin_model->hasilUjiankd();
-        $nourut = substr($dariDB, 3, 3);
+        $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 3);
         $idsekarang = $nourut + 1;
 
         $data['kd_hasil_ujian'] = $idsekarang;
