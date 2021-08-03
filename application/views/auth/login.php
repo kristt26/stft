@@ -45,7 +45,7 @@
   <div class="login-logo">
     <!-- <a href="<?= base_url() ?>assets/index2.html"><b>Admin</b>LTE</a> -->
   </div>
-  <?= $this->session->flashdata('message');?>
+  <!-- <?= $this->session->flashdata('message');?> -->
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">

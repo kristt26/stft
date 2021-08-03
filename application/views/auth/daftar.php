@@ -33,7 +33,7 @@
   <div class="register-logo">
     <a href="<?= base_url() ?>assets/index2.html"><h3 style="font-family:helvetica;">Penerimaan Mahasiswa Baru STFT</h3></a>
   </div>
-  <?= $this->session->flashdata('message');?>
+  <!-- <?= $this->session->flashdata('message');?> -->
 
   <div class="card" style="border-radius:40px;">
     <div class="card-body register-card-body">
