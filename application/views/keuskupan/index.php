@@ -1,7 +1,7 @@
 
   
 <div class="content-wrapper">
-<?= $this->session->flashdata('message');?>
+<!-- <?= $this->session->flashdata('message');?> -->
       <!-- Content Header (Page header) -->
   <div class="content-header bg-white mb-2">
       <div class="container-fluid">
