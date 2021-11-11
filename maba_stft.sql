@@ -1,6 +1,6 @@
 ﻿# Host: localhost  (Version 5.5.5-10.4.17-MariaDB)
-# Date: 2021-07-31 15:00:49
-# Generator: MySQL-Front 6.1  (Build 1.26)
+# Date: 2021-11-11 15:12:56
+# Generator: MySQL-Front 6.0  (Build 2.20)
 
 
 #
@@ -42,6 +42,27 @@ CREATE TABLE `berita` (
 INSERT INTO `berita` VALUES ('B-001','BEM STFT Fajar Timur periode 2021/2022 Terpilih di lantik','<p>fdrdtrdt ftfytf g r ft  y ft   </p>','2021-07-13','berita2.jpg');
 
 #
+# Structure for table "daftar"
+#
+
+DROP TABLE IF EXISTS `daftar`;
+CREATE TABLE `daftar` (
+  `kd_daftar` varchar(45) NOT NULL,
+  `kd_maba` varchar(9) NOT NULL,
+  `kd_gelombang` varchar(3) NOT NULL,
+  `kd_tahun_ajaran` varchar(9) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `status_berkas` enum('valid','tidak valid') DEFAULT NULL,
+  PRIMARY KEY (`kd_daftar`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+#
+# Data for table "daftar"
+#
+
+INSERT INTO `daftar` VALUES ('MB-618ca2c0d2559','CM-001-19','G-1','T-2019-1','0','valid'),('MB-618ca5406c96c','CM-001-19','G-2','T-2019-1','1','valid');
+
+#
 # Structure for table "data_diri"
 #
 
@@ -60,7 +81,6 @@ CREATE TABLE `data_diri` (
   `kartu_keluarga` varchar(100) NOT NULL,
   `surat_baptis` varchar(100) NOT NULL,
   `ijazah` varchar(100) NOT NULL,
-  `status_berkas` varchar(11) NOT NULL,
   `kd_tahun_ajaran` varchar(255) DEFAULT NULL,
   `kd_gelombang` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`kd_maba`)
@@ -70,6 +90,7 @@ CREATE TABLE `data_diri` (
 # Data for table "data_diri"
 #
 
+INSERT INTO `data_diri` VALUES ('CM-001-19','Ajenkris Yanto Kungkung','kristt26','1011','Makassar','1988-03-26','laki-laki','082238281801','K-02','a63b1386454e14aa400ae0e4aa5045a8.jpeg','783bf5e594ae4308c3bbcfa1dd0fe069.jpeg','f6894cbe3247ceb1802d380b487ab616.jpeg','3612d75f74e72a4a816bc1ce2f19f8b2.jpeg',NULL,NULL);
 
 #
 # Structure for table "dosen"
@@ -147,6 +168,7 @@ CREATE TABLE `jadwal` (
 # Data for table "jadwal"
 #
 
+INSERT INTO `jadwal` VALUES ('J-01','U-1','14:20:00','15:00:00','2021-11-11','G-2','','T-2019-1',NULL);
 
 #
 # Structure for table "jawaban"
@@ -165,6 +187,7 @@ CREATE TABLE `jawaban` (
 # Data for table "jawaban"
 #
 
+INSERT INTO `jawaban` VALUES (17,'CM-001-19','SV-01','as'),(18,'CM-001-19','SV-02','as');
 
 #
 # Structure for table "soal_tes"
