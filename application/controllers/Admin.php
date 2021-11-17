@@ -12,7 +12,7 @@ class Admin extends CI_Controller
     }
 
     public function index()
-    {   
+    {
         $data['jumlahKeuskupan'] = $this->Admin_model->jumlahKeuskupan();
         $data['jumlahUjian'] = $this->Admin_model->jumlahUjian();
         $data['jumlahGelombang'] = $this->Admin_model->jumlahGelombang();
@@ -25,8 +25,6 @@ class Admin extends CI_Controller
         $this->load->view('admin/index', $data);
         $this->load->view('templates/admin/footer');
     }
-
-
 
     public function lihat_berkas($id)
     {
@@ -42,8 +40,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     // Berita
     public function berita()
     {
@@ -56,7 +52,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function berita_tambah()
     {
         $this->form_validation->set_rules('kd_berita', 'Kode Berita', 'required');
@@ -68,11 +63,10 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $dariDB = $this->Admin_model->BeritaOtomatis();
             $nourut = substr($dariDB, 2, 4);
-
 
             $idsekarang = $nourut + 1;
             $data['kd_berita'] = $idsekarang;
@@ -104,7 +98,7 @@ class Admin extends CI_Controller
                 "judul" => $post['judul'],
                 "isi_berita" => $post['isi_berita'],
                 "tanggal" => $post['tanggal'],
-                "gambar" => $gambar
+                "gambar" => $gambar,
             ];
 
             $this->db->insert('berita', $data);
@@ -112,7 +106,6 @@ class Admin extends CI_Controller
             redirect('admin/berita');
         }
     }
-
 
     public function berita_detail($id)
     {
@@ -123,8 +116,6 @@ class Admin extends CI_Controller
         $this->load->view('admin/berita_detail', $data);
         $this->load->view('templates/admin/berita_footer');
     }
-
-
 
     public function berita_ubah($id)
     {
@@ -146,14 +137,13 @@ class Admin extends CI_Controller
         $gambar = $_FILES['gambar']['name'];
         if (!empty($gambar)) {
 
-
             $item = $this->db->query("SELECT * FROM berita WHERE kd_berita = '$kd_berita'")->row();
             if ($item->gambar != null) {
                 $target_file = './assets/img/berita/' . $item->gambar;
                 unlink($target_file);
             }
-            $config['upload_path']         = './assets/img/berita';
-            $config['allowed_types']    = 'jpg|jpeg|png|tiff';
+            $config['upload_path'] = './assets/img/berita';
+            $config['allowed_types'] = 'jpg|jpeg|png|tiff';
 
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('gambar')) {
@@ -167,7 +157,7 @@ class Admin extends CI_Controller
                 "kd_berita" => $kd_berita,
                 "judul" => $judul,
                 "isi_berita" => $isi_berita,
-                "tanggal" => $tanggal
+                "tanggal" => $tanggal,
 
             ];
 
@@ -178,15 +168,13 @@ class Admin extends CI_Controller
             redirect('admin/berita');
         }
 
-
         $data = [
             "kd_berita" => $kd_berita,
             "judul" => $judul,
             "isi_berita" => $isi_berita,
             "tanggal" => $tanggal,
-            "gambar" => $gambar
+            "gambar" => $gambar,
         ];
-
 
         $this->db->where('kd_berita', $kd_berita);
         $this->db->update('berita', $data);
@@ -223,7 +211,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama Dosen', 'required');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/admin/header');
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/topbar');
@@ -235,7 +223,7 @@ class Admin extends CI_Controller
             } else {
                 $config['upload_path'] = './assets/img/dosen';
                 $config['allowed_types'] = 'jpg|png|gif';
-                $config['encrypt_name'] = TRUE;
+                $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
                 if (!$this->upload->do_upload('foto')) {
                     echo "Upload Gagal";
@@ -247,7 +235,7 @@ class Admin extends CI_Controller
                     $data = [
                         "nidn" => $post['nidn'],
                         "nama" => $post['nama'],
-                        "foto" => $gambar
+                        "foto" => $gambar,
                     ];
 
                     $this->db->insert('dosen', $data);
@@ -272,7 +260,7 @@ class Admin extends CI_Controller
     {
         $data = [
             "nidn" => $this->input->post('nidn'),
-            "nama" => $this->input->post('nama')
+            "nama" => $this->input->post('nama'),
         ];
 
         $gambar = $_FILES['foto']['name'];
@@ -282,9 +270,9 @@ class Admin extends CI_Controller
                 $target_file = './assets/img/berita/' . $item->gambar;
                 unlink($target_file);
             }
-            $config['upload_path']         = './assets/img/dosen';
-            $config['allowed_types']    = 'jpg|jpeg|png|tiff';
-            $config['encrypt_name'] = TRUE;
+            $config['upload_path'] = './assets/img/dosen';
+            $config['allowed_types'] = 'jpg|jpeg|png|tiff';
+            $config['encrypt_name'] = true;
 
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('foto')) {
@@ -310,17 +298,6 @@ class Admin extends CI_Controller
         redirect('admin/dosen');
     }
 
-
-
-
-
-
-
-
-
-
-
-
     // Keuskupan
 
     public function keuskupan_data()
@@ -333,7 +310,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function keuskupan_tambah()
     {
         $this->form_validation->set_rules('kd_keuskupan', 'Kode Keuskupan', 'required');
@@ -344,7 +320,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $dariDB = $this->Admin_model->otomatis();
             $nourut = substr($dariDB, 2, 4);
@@ -362,7 +338,7 @@ class Admin extends CI_Controller
             $data = [
                 "kd_keuskupan" => $post['kd_keuskupan'],
                 "nama_keuskupan" => $post['nama_keuskupan'],
-                "alamat" => $post['alamat']
+                "alamat" => $post['alamat'],
             ];
 
             $this->db->insert('asal_keuskupan', $data);
@@ -370,7 +346,6 @@ class Admin extends CI_Controller
             redirect('admin/keuskupan_data');
         }
     }
-
 
     public function hapus_keuskupan($id)
     {
@@ -382,10 +357,8 @@ class Admin extends CI_Controller
         //     Data Berhasil dihapus</div>',
         // );
         // $this->session->set_flashdata($message);
-        //   redirect('admin/keuskupan_data');  
+        //   redirect('admin/keuskupan_data');
     }
-
-
 
     public function keuskupan_ubah($id)
     {
@@ -397,7 +370,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function keuskupan_edit_proses()
     {
         $kd_keuskupan = $this->input->post('kd_keuskupan');
@@ -407,7 +379,7 @@ class Admin extends CI_Controller
         $data = [
             "kd_keuskupan" => $kd_keuskupan,
             "nama_keuskupan" => $nama_keuskupan,
-            "alamat" => $alamat
+            "alamat" => $alamat,
         ];
 
         // print'<pre>';
@@ -420,11 +392,6 @@ class Admin extends CI_Controller
         redirect('admin/keuskupan_data');
     }
 
-
-
-
-
-
     // Ujian
     public function ujian_data()
     {
@@ -436,19 +403,16 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     public function ujian_tambah()
     {
         $this->form_validation->set_rules('kd_ujian', 'Kode Ujian', 'required');
         $this->form_validation->set_rules('nama_ujian', 'Ujian', 'required');
 
-
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $dariDB = $this->Admin_model->UjianOtomatis();
             $nourut = substr($dariDB, 2, 4);
@@ -464,15 +428,13 @@ class Admin extends CI_Controller
 
             $data = [
                 "kd_ujian" => $post['kd_ujian'],
-                "nama_ujian" => $post['nama_ujian']
+                "nama_ujian" => $post['nama_ujian'],
             ];
             $this->db->insert('ujian', $data);
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/ujian_data');
         }
     }
-
-
 
     public function ujian_ubah($id)
     {
@@ -484,19 +446,15 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     public function ujian_edit_proses()
     {
         $kd_ujian = $this->input->post('kd_ujian');
         $nama_ujian = $this->input->post('nama_ujian');
 
-
         $data = [
             "kd_ujian" => $kd_ujian,
-            "nama_ujian" => $nama_ujian
+            "nama_ujian" => $nama_ujian,
         ];
-
 
         $this->db->where('kd_ujian', $kd_ujian);
         $this->db->update('ujian', $data);
@@ -505,16 +463,11 @@ class Admin extends CI_Controller
         redirect('admin/ujian_data');
     }
 
-
     public function hapus_ujian($id)
     {
         $finish = $this->db->delete('ujian', ['kd_ujian' => $id]);
         echo json_encode($finish);
     }
-
-
-
-
 
     // Tahun Ajaran
     public function tahun_ajaran_data()
@@ -527,8 +480,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     public function tahun_tambah()
     {
         $this->form_validation->set_rules('kd_tahun_ajaran', 'Kode Tahun Ajaran', 'required');
@@ -538,13 +489,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('is_unique', '%s sudah diinputkan sebelumnya');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $data['tahunTerakhir'] = $this->Admin_model->tahunTerakhir();
 
             $dariDB = $this->Admin_model->TahunOtomatis();
             $nourut = is_null($dariDB) ? 0 : substr($dariDB, 2, 4);
-
 
             $idsekarang = $nourut + 1;
             $data['kd_tahun'] = $idsekarang;
@@ -559,21 +509,61 @@ class Admin extends CI_Controller
 
             $data = [
                 "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
-                "tahun_ajaran" => $post['tahun_ajaran']
+                "tahun_ajaran" => $post['tahun_ajaran'],
             ];
             $sub_tahun = substr($data['tahun_ajaran'], 5, 4);
             $thn = [
                 "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-1',
-                "tahun_ajaran" => $post['tahun_ajaran']
+                "tahun_ajaran" => $post['tahun_ajaran'],
             ];
 
             $this->db->insert('tahun_ajaran', $thn);
+
+            // $thn2 = [
+            //     "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-2',
+            //     "tahun_ajaran" => $post['tahun_ajaran']
+            // ];
+
+            // $this->db->insert('tahun_ajaran', $thn2);
+
+            // print'<pre>';
+            // var_dump($thn);
+            // print'<pre>';
+            // var_dump($thn2);
+
+            // die;
+
+            // $this->db->insert('tahun_ajaran',$data);
+
+            //   $tahun =  $this->db->get_where('tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']])->row_array();
+
+            //   $sub_tahun = substr($tahun['tahun_ajaran'],5,4);
+            // //  echo $sub_tahun;
+
+            // $th = 'T-'.$sub_tahun.'-2';
+
+            //   $intahun = [
+            //       "kd_tahun_ajaran" => $th,
+            //       "tahun_ajaran" => $post['tahun_ajaran']
+            //   ];
+
+            //     $this->db->insert('tahun_ajaran',$intahun);
+
+            //     $this->db->delete('tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']]);
+
+            //   print'<pre>';
+            //   print_r($intahun); die;
+
+            //   $this->db->where('kd_tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']])
+            //   $this->db->update('tahun_ajaran',$data);
+
+            //   print'<pre>';
+            //   var_dump($tahun); die;
+
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/tahun_ajaran_data');
         }
     }
-
-
 
     public function tahun_ubah($id)
     {
@@ -585,20 +575,15 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
     public function tahun_edit_proses()
     {
         $kd_tahun_ajaran = $this->input->post('kd_tahun_ajaran');
         $tahun_ajaran = $this->input->post('tahun_ajaran');
 
-
         $data = [
             "kd_tahun_ajaran" => $kd_tahun_ajaran,
-            "tahun_ajaran" => $tahun_ajaran
+            "tahun_ajaran" => $tahun_ajaran,
         ];
-
 
         $this->db->where('kd_tahun_ajaran', $kd_tahun_ajaran);
         $this->db->update('tahun_ajaran', $data);
@@ -607,16 +592,11 @@ class Admin extends CI_Controller
         redirect('admin/tahun_ajaran_data');
     }
 
-
-
     public function hapus_tahun($id)
     {
         $finish = $this->db->delete('tahun_ajaran', ['kd_tahun_ajaran' => $id]);
         echo json_encode($finish);
     }
-
-
-
 
     // Gelombang
     public function gelombang_data()
@@ -629,9 +609,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
     public function gelombang_tambah()
     {
         $this->form_validation->set_rules('kd_gelombang', 'Kode Gelombang', 'required');
@@ -641,7 +618,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $data['gelombangTerakhir'] = $this->Admin_model->gelombangTerakhir();
 
@@ -660,7 +637,7 @@ class Admin extends CI_Controller
 
             $data = [
                 "kd_gelombang" => $post['kd_gelombang'],
-                "gelombang" => $post['gelombang']
+                "gelombang" => $post['gelombang'],
             ];
 
             $this->db->insert('gelombang', $data);
@@ -668,8 +645,6 @@ class Admin extends CI_Controller
             redirect('admin/gelombang_data');
         }
     }
-
-
 
     public function gelombang_ubah($id)
     {
@@ -681,19 +656,15 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     public function gelombang_edit_proses()
     {
         $kd_gelombang = $this->input->post('kd_gelombang');
         $gelombang = $this->input->post('gelombang');
 
-
         $data = [
             "kd_gelombang" => $kd_gelombang,
-            "gelombang" => $gelombang
+            "gelombang" => $gelombang,
         ];
-
 
         $this->db->where('kd_gelombang', $kd_gelombang);
         $this->db->update('gelombang', $data);
@@ -702,19 +673,11 @@ class Admin extends CI_Controller
         redirect('admin/gelombang_data');
     }
 
-
-
     public function hapus_gelombang($id)
     {
         $finish = $this->db->delete('gelombang', ['kd_gelombang' => $id]);
         echo json_encode($finish);
     }
-
-
-
-
-
-
 
     // Soal tes
     public function soal_data()
@@ -727,7 +690,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function validasi_soal_data()
     {
         $data['validasi_soal'] = $this->Admin_model->ValidasiSoalJoin();
@@ -737,7 +699,6 @@ class Admin extends CI_Controller
         $this->load->view('admin/validasi_soal_data', $data);
         $this->load->view('templates/admin/footer');
     }
-
 
     public function validasi_soal_ubah($id)
     {
@@ -750,7 +711,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function validasi_soal_edit_proses()
     {
         $kd_soal_tes = $this->input->post('kd_soal_tes');
@@ -761,17 +721,13 @@ class Admin extends CI_Controller
 
         $data = [
             "kd_soal_tes" => $kd_soal_tes,
-            "soal" => $soal
+            "soal" => $soal,
         ];
-
 
         $this->db->where('kd_soal_tes', $kd_soal_tes);
         $this->db->update('soal_tes', $data);
         redirect('admin/validasi_soal_data');
     }
-
-
-
 
     public function soal_tambah()
     {
@@ -785,11 +741,10 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $dariDB = $this->Admin_model->SoalOtomatis();
             $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 4);
-
 
             $idsekarang = $nourut + 1;
             $data['kd_soal_tes'] = $idsekarang;
@@ -805,7 +760,7 @@ class Admin extends CI_Controller
             $data = [
                 "kd_soal_tes" => $post['kd_soal_tes'],
                 "soal" => $post['soal'],
-                "kd_ujian" => $post['kd_ujian']
+                "kd_ujian" => $post['kd_ujian'],
             ];
 
             $this->db->insert('soal_tes', $data);
@@ -813,8 +768,6 @@ class Admin extends CI_Controller
             redirect('admin/soal_data');
         }
     }
-
-
 
     public function soal_ubah($id)
     {
@@ -827,21 +780,17 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
     public function soal_edit_proses()
     {
         $kd_soal_tes = $this->input->post('kd_soal_tes');
         $soal = $this->input->post('soal');
         $kd_ujian = $this->input->post('kd_ujian');
 
-
         $data = [
             "kd_soal_tes" => $kd_soal_tes,
             "soal" => $soal,
-            "kd_ujian" => $kd_ujian
+            "kd_ujian" => $kd_ujian,
         ];
-
 
         $this->db->where('kd_soal_tes', $kd_soal_tes);
         $this->db->update('soal_tes', $data);
@@ -850,17 +799,11 @@ class Admin extends CI_Controller
         redirect('admin/soal_data');
     }
 
-
-
     public function hapus_soal($id)
     {
         $finish = $this->db->delete('soal_tes', ['kd_soal_tes' => $id]);
         echo json_encode($finish);
     }
-
-
-
-
 
     // Standar Kelulusan
     public function standar_kelulusan_data()
@@ -873,7 +816,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function standar_kelulusan_tambah()
     {
         $data['ujian'] = $this->db->get('ujian')->result_array();
@@ -883,9 +825,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('kd_ujian', 'Ujian', 'required');
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-        if ($this->form_validation->run() == FALSE) {
+
+        if ($this->form_validation->run() == false) {
+
             $dariDB = $this->Admin_model->StandarOtomatis();
             $nourut = substr($dariDB, 3, 4);
+
             $idsekarang = $nourut + 1;
             $data['kd_standar_kelulusan'] = $idsekarang;
             $this->load->view('templates/admin/header');
@@ -898,14 +843,13 @@ class Admin extends CI_Controller
             $data = [
                 "kd_standar_kelulusan" => $post['kd_standar_kelulusan'],
                 "kd_ujian" => $post['kd_ujian'],
-                "nilai" => $post['nilai']
+                "nilai" => $post['nilai'],
             ];
             $this->db->insert('standar_kelulusan', $data);
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/standar_kelulusan_data');
         }
     }
-
 
     public function standar_kelulusan_ubah($id)
     {
@@ -918,20 +862,17 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
     public function standar_edit_proses()
     {
         $kd_standar_kelulusan = $this->input->post('kd_standar_kelulusan');
         $kd_ujian = $this->input->post('kd_ujian');
         $nilai = $this->input->post('nilai');
 
-
         $data = [
             "kd_standar_kelulusan" => $kd_standar_kelulusan,
             "kd_ujian" => $kd_ujian,
-            "nilai" => $nilai
+            "nilai" => $nilai,
         ];
-
 
         $this->db->where('kd_standar_kelulusan', $kd_standar_kelulusan);
         $this->db->update('standar_kelulusan', $data);
@@ -940,17 +881,11 @@ class Admin extends CI_Controller
         redirect('admin/standar_kelulusan_data');
     }
 
-
-
     public function hapus_standar($id)
     {
         $finish = $this->db->delete('standar_kelulusan', ['kd_standar_kelulusan' => $id]);
         echo json_encode($finish);
     }
-
-
-
-
 
     // Jadwal
     public function jadwal_data()
@@ -967,7 +902,11 @@ class Admin extends CI_Controller
     {
         $data['ujian'] = $this->db->get('ujian')->result_array();
         $data['gelombang'] = $this->db->get('gelombang')->result_array();
-        $data['data_diri'] = $this->db->query("SELECT * FROM data_diri WHERE status_berkas='valid'")->result_array();
+        $data['data_diri'] = $this->db->query("SELECT
+            *
+            FROM
+            `data_diri`
+            LEFT JOIN `daftar` ON `data_diri`.`kd_maba` = `daftar`.`kd_maba` WHERE status_berkas='valid'")->result_array();
         $data['tahun_ajaran'] = $this->db->get('tahun_ajaran')->result_array();
 
         $this->form_validation->set_rules('kd_jadwal', 'Kode Jadwal', 'required');
@@ -981,7 +920,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
 
             $dariDB = $this->Admin_model->jadwalOtomatis();
             $idsekarang = is_null($dariDB) ? 1 : substr($dariDB, 2, 4) + 1;
@@ -994,7 +933,7 @@ class Admin extends CI_Controller
             $this->load->view('templates/admin/footer');
         } else {
             $post = $this->input->post();
-            $maba = $this->db->get_where("data_diri", ['kd_tahun_ajaran'=>$post['kd_tahun_ajaran'], 'kd_gelombang'=>$post['kd_gelombang']])->result_array();
+            $maba = $this->db->get_where("data_diri", ['kd_tahun_ajaran' => $post['kd_tahun_ajaran'], 'kd_gelombang' => $post['kd_gelombang']])->result_array();
             $data = [
                 "kd_jadwal" => $post['kd_jadwal'],
                 "kd_ujian" => $post['kd_ujian'],
@@ -1002,21 +941,19 @@ class Admin extends CI_Controller
                 "jam_selesai" => $post['jam_selesai'],
                 "tanggal" => $post['tanggal'],
                 "kd_gelombang" => $post['kd_gelombang'],
-                "kd_tahun_ajaran" => $post['kd_tahun_ajaran']
+                "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
             ];
             $result = $this->db->insert('jadwal', $data);
-            if($result){
-                $ujian = $this->db->get_where("ujian", ['kd_ujian'=>$post['kd_ujian']])->row_array();
+            if ($result) {
+                $ujian = $this->db->get_where("ujian", ['kd_ujian' => $post['kd_ujian']])->row_array();
                 foreach ($maba as $key => $value) {
-                    $this->mylib->rest_kirim($value['no_hp'], "Jadwal Ujian\n"."Ujian: ".$ujian['nama_ujian']."\nTanggal: ".$post['tanggal']."\nJam: ".$post['jam_mulai']."s/d".$post['jam_selesai']);
+                    $this->mylib->rest_kirim($value['no_hp'], "Jadwal Ujian\n" . "Ujian: " . $ujian['nama_ujian'] . "\nTanggal: " . $post['tanggal'] . "\nJam: " . $post['jam_mulai'] . "s/d" . $post['jam_selesai']);
                 }
             }
             $this->session->set_flashdata('success', 'Berhasil ditambahkan');
             redirect('admin/jadwal_data', 'refresh');
         }
     }
-
-
 
     public function jadwal_ubah($id)
     {
@@ -1034,10 +971,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
-
     public function jadwal_edit_proses()
     {
         $kd_jadwal = $this->input->post('kd_jadwal');
@@ -1049,7 +982,6 @@ class Admin extends CI_Controller
         $kd_maba = $this->input->post('kd_maba');
         $kd_tahun_ajaran = $this->input->post('kd_tahun_ajaran');
 
-
         $data = [
             "kd_jadwal" => $kd_jadwal,
             "kd_ujian" => $kd_ujian,
@@ -1058,7 +990,7 @@ class Admin extends CI_Controller
             "tanggal" => $tanggal,
             "kd_gelombang" => trim($kd_gelombang),
             "kd_maba" => $kd_maba,
-            "kd_tahun_ajaran" => $kd_tahun_ajaran
+            "kd_tahun_ajaran" => $kd_tahun_ajaran,
         ];
         // print'<pre>';
         // print_r($data);
@@ -1070,35 +1002,35 @@ class Admin extends CI_Controller
         redirect('admin/jadwal_data', 'refresh');
     }
 
-
-
     public function hapus_jadwal($id)
     {
         $finish = $this->db->delete('jadwal', ['kd_jadwal' => $id]);
         echo json_encode($finish);
     }
 
-
-
-
-
     // Hasil
     public function hasil_data()
     {
         $this->db->select('*');
         $this->db->from('data_diri');
+        $this->db->join('daftar', 'daftar.kd_maba=data_diri.kd_maba');
         $this->db->join('jadwal', 'jadwal.kd_maba=data_diri.kd_maba');
         $this->db->join('ujian', 'ujian.kd_ujian=jadwal.kd_ujian');
-        $data['hasil'] =  $this->db->get()->result_array();
+        $this->db->where('status', "1");
+
+        $data['hasil'] = $this->db->get()->result_array();
         $data['maba'] = $this->db->query("SELECT
-          `data_diri`.*,
+            `data_diri`.*,
+            `daftar`.*,
             `jawaban`.`kd_jawaban`,
             `jawaban`.`kd_soal_valid`,
             `jawaban`.`jawaban`
-        FROM
-        `data_diri`
-        LEFT JOIN `jawaban` ON `jawaban`.`kd_maba` = `data_diri`.`kd_maba`
-        GROUP BY data_diri.kd_maba")->result_array();
+            FROM
+            `data_diri`
+            LEFT JOIN `jawaban` ON `jawaban`.`kd_maba` = `data_diri`.`kd_maba`
+            LEFT JOIN `daftar` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
+            WHERE daftar.status='1'
+            GROUP BY data_diri.kd_maba")->result_array();
 
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');
@@ -1107,14 +1039,11 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
-    public function hasil_lihat($kd_maba)
+    public function hasil_lihat($kd_daftar)
     {
 
         //echo $kd_maba; die;
-        $data['maba'] = $this->Admin_model->NoUjianHasil($kd_maba);
+        $data['maba'] = $this->Admin_model->NoUjianHasil($kd_daftar);
 
         $data['jadwal'] = $this->Admin_model->jadwalUjianHasil($data['maba']);
 
@@ -1127,8 +1056,6 @@ class Admin extends CI_Controller
         $this->load->view('admin/hasil_lihat', $data);
         $this->load->view('templates/admin/footer');
     }
-
-
 
     public function periksa_ujian($id, $kd_maba)
     {
@@ -1150,10 +1077,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
-
     public function input_hasil()
     {
         $post = $this->input->post();
@@ -1164,18 +1087,11 @@ class Admin extends CI_Controller
         //     "nilai" => $post['nilai']
         // ];
 
-
         $this->db->insert('hasil_ujian', $post);
-        redirect('admin/hasil_lihat/' .  $post['kd_maba']);
+        redirect('admin/hasil_lihat/' . $post['kd_maba']);
         // redirect('admin/periksa_ujian/' . $post['kd_ujian'] .'/'. $post['kd_maba'] );
 
-
     }
-
-
-
-
-
 
     public function calon_maba()
     {
@@ -1187,9 +1103,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-
-
-
     public function proses_validasi($id = null, $status = null)
     {
         $maba = $this->db->get_where('data_diri', ['kd_maba' => $id])->row_array();
@@ -1197,11 +1110,11 @@ class Admin extends CI_Controller
             if ($status == 'no') {
 
                 $data = [
-                    "status_berkas" => 'tidak valid'
+                    "status_berkas" => 'tidak valid',
                 ];
 
-                $this->db->where('kd_maba', $id);
-                $result = $this->db->update('data_diri', $data);
+                $this->db->where('kd_daftar', $id);
+                $result = $this->db->update('daftar', $data);
 
                 if ($result) {
                     $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran Tidak Valid");
@@ -1209,11 +1122,11 @@ class Admin extends CI_Controller
                 redirect('admin/calon_maba');
             } else {
                 $data = [
-                    "status_berkas" => $status
+                    "status_berkas" => $status,
                 ];
 
-                $this->db->where('kd_maba', $id);
-                $result = $this->db->update('data_diri', $data);
+                $this->db->where('kd_daftar', $id);
+                $result = $this->db->update('daftar', $data);
                 if ($result) {
                     $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran anda telah di periksa dan Valid");
                 }
