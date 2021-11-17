@@ -34,10 +34,11 @@
   <div class="login-logo">
   </div>
   <div class="card">
+	<div class="flash-login" data-login="<?= $this->session->flashdata('pesan'); ?>"></div>
     <div class="card-body login-card-body">
     <img src="<?= base_url('assets/img/logo/logo.jpeg') ?>" alt="" class="tengah">
       <p class="login-box-msg">Masukan username dan password</p>
-
+			
       <form action="<?= site_url('auth/proses') ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" name="username">
@@ -67,6 +68,10 @@
           
         </div>
       </form>
+			<?php
+			session_unset();
+    	session_destroy();
+			?>
 
       
 
@@ -83,6 +88,21 @@
 <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url() ?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?= base_url() ?>assets/dist/sweetalert2.all.min.js"></script>
+<script>
+	var flashLogin = $('.flash-login').data('login');
+	// var flashLogin = $('.flash-login');
+	// var a = 2;
+
+	if (flashLogin) {
+			Swal.fire({
+					title: 'Info',
+					text: flashLogin,
+					icon: 'error',
+			});
+	}
+
+</script>
 
 </body>
 </html>

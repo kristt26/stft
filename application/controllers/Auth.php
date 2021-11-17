@@ -6,6 +6,7 @@ class Auth extends CI_Controller {
 
     public function index()
     {
+		// 
         $this->load->view('auth/login'); 
     }
 
@@ -23,7 +24,7 @@ class Auth extends CI_Controller {
                 'akses' => 'admin'
             );
             $this->session->set_userdata( $array );
-          //  $this->session->set_flashdata('flash', 'Login Berhasil');
+           $this->session->set_flashdata('flash', 'Login Berhasil');
             redirect('admin');
         } elseif ($password == 'bak' && $username =='bak') {
             $array = array(
@@ -33,7 +34,7 @@ class Auth extends CI_Controller {
             redirect('bak');
         }
         elseif ($password == 'keuskupan' && $username == 'keuskupan') {
-          //  $this->session->set_flashdata('flash', 'Login Berhasil');
+           $this->session->set_flashdata('flash', 'Login Berhasil');
             redirect('keuskupan');
             
         }  elseif ($password == $user['password'] && $username == $user['username']){
@@ -41,12 +42,7 @@ class Auth extends CI_Controller {
             redirect('maba');
 
         } else {
-            $message = array(
-                'message'=>'<div class="alert alert-danger">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Username atau Password Salah !</div>',
-            );
-            $this->session->set_flashdata($message);
+            $this->session->set_flashdata('pesan', 'Username tidak ditemukan');
             redirect('auth');
         }
 
@@ -131,7 +127,8 @@ class Auth extends CI_Controller {
 
     public function logout()
     {
-        $this->session->unset_userdata('username');
+        session_unset();
+    	session_destroy();
         redirect('auth');
     }
 
