@@ -1,31 +1,22 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-
-   <!-- Content Header (Page header) -->
 <div class="content-header bg-white mb-2">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h3 class="m-0 text-dark">Dosen</h3>
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Dosen</a></li>
               <li class="breadcrumb-item active">Data Dosen</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
-    
-
-    <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-12">
-
-        <!-- <div class="flash-save-berita" data-flashberita="<?= $this->session->flashdata('flash'); ?>"></div> -->
         
         <a href="<?= site_url('admin/dosen_tambah'); ?>" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Tambah Data</a>
         <br><br>
@@ -33,7 +24,6 @@
             <div class="card-header">
               <h3 class="card-title">Data Dosen</h3>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -41,7 +31,6 @@
                   <th>No</th>
                   <th>NIDN</th>
                   <th>Nama</th>
-                  <!-- <th>Berita</th>  -->
                   <th>Foto</th> 
                   <th>Aksi</th> 
                 </tr>
@@ -60,23 +49,16 @@
                   </td>
                 </tr>
                 <?php endforeach; ?>
-                
-              
                 </tbody>
                
               </table>
 
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
-        <!-- /.col -->
+        
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 
   

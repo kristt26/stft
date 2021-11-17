@@ -17,15 +17,10 @@ class Bak extends CI_Controller {
 
     public function validasi_soal() 
     {
-       
             $data['soal'] = $this->Bak_model->SoalJoin();
-
             $DBvalidasi = $this->Bak_model->ValidasiSoalId();
             $noValid = substr($DBvalidasi, 3, 4);
-            
-            
             $kd_soal_valid = $noValid + 1;
-        //  print_r($idValid); die;
            $data['kd_soal_valid'] = $kd_soal_valid;
 
             $dariDB = $this->Admin_model->SoalOtomatis();
@@ -33,7 +28,6 @@ class Bak extends CI_Controller {
             
             
             $idsekarang = $nourut + 1;
-          // print_r($dariDB); die;
             $data['kd_soal_tes'] = $idsekarang;
             
             $this->load->view('templates/bak/header');
@@ -41,8 +35,6 @@ class Bak extends CI_Controller {
             $this->load->view('templates/bak/topbar');
             $this->load->view('bak/validasi_soal',$data);
             $this->load->view('templates/bak/footer');
-       
-        
     }
 
 
@@ -110,7 +102,6 @@ class Bak extends CI_Controller {
     public function laporan_data()
     {
         $data['hasilTes'] = $this->Bak_model->HasilTes();
-
         $this->load->view('templates/bak/header');
         $this->load->view('templates/bak/sidebar');
         $this->load->view('templates/bak/topbar');

@@ -75,7 +75,6 @@ class Admin extends CI_Controller
 
 
             $idsekarang = $nourut + 1;
-            //  print_r($idsekarang); die;
             $data['kd_berita'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -349,10 +348,7 @@ class Admin extends CI_Controller
 
             $dariDB = $this->Admin_model->otomatis();
             $nourut = substr($dariDB, 2, 4);
-
-
             $idsekarang = $nourut + 1;
-            // print_r($nourut); die;
             $data['kd_keuskupan'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -456,12 +452,8 @@ class Admin extends CI_Controller
 
             $dariDB = $this->Admin_model->UjianOtomatis();
             $nourut = substr($dariDB, 2, 4);
-
-
             $idsekarang = $nourut + 1;
-            //  print_r($idsekarang); die;
             $data['kd_ujian'] = $idsekarang;
-
             $this->load->view('templates/admin/header');
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/topbar');
@@ -474,7 +466,6 @@ class Admin extends CI_Controller
                 "kd_ujian" => $post['kd_ujian'],
                 "nama_ujian" => $post['nama_ujian']
             ];
-
             $this->db->insert('ujian', $data);
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/ujian_data');
@@ -556,7 +547,6 @@ class Admin extends CI_Controller
 
 
             $idsekarang = $nourut + 1;
-            // print_r($idsekarang); die;
             $data['kd_tahun'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -571,63 +561,13 @@ class Admin extends CI_Controller
                 "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
                 "tahun_ajaran" => $post['tahun_ajaran']
             ];
-
-
             $sub_tahun = substr($data['tahun_ajaran'], 5, 4);
-
-            // echo $sub_tahun;
-
             $thn = [
                 "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-1',
                 "tahun_ajaran" => $post['tahun_ajaran']
             ];
 
             $this->db->insert('tahun_ajaran', $thn);
-
-            // $thn2 = [
-            //     "kd_tahun_ajaran" => 'T-' . $sub_tahun . '-2',
-            //     "tahun_ajaran" => $post['tahun_ajaran']
-            // ];
-
-            // $this->db->insert('tahun_ajaran', $thn2);
-
-            // print'<pre>';
-            // var_dump($thn);
-            // print'<pre>';
-            // var_dump($thn2);
-
-
-            // die;
-
-            // $this->db->insert('tahun_ajaran',$data);
-
-            //   $tahun =  $this->db->get_where('tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']])->row_array();
-
-            //   $sub_tahun = substr($tahun['tahun_ajaran'],5,4);
-            // //  echo $sub_tahun;
-
-            // $th = 'T-'.$sub_tahun.'-2';
-
-            //   $intahun = [
-            //       "kd_tahun_ajaran" => $th,
-            //       "tahun_ajaran" => $post['tahun_ajaran']
-            //   ];
-
-
-            //     $this->db->insert('tahun_ajaran',$intahun);
-
-            //     $this->db->delete('tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']]);
-
-
-            //   print'<pre>';
-            //   print_r($intahun); die;
-
-            //   $this->db->where('kd_tahun_ajaran',['kd_tahun_ajaran' => $post['kd_tahun_ajaran']])
-            //   $this->db->update('tahun_ajaran',$data);
-
-            //   print'<pre>';
-            //   var_dump($tahun); die;
-
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/tahun_ajaran_data');
         }
@@ -682,7 +622,6 @@ class Admin extends CI_Controller
     public function gelombang_data()
     {
         $data['gelombang'] = $this->db->get('gelombang')->result_array();
-        // $data['gelombang'] = $this->Admin_model->gelombang();
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');
         $this->load->view('templates/admin/topbar');
@@ -708,10 +647,7 @@ class Admin extends CI_Controller
 
             $dariDB = $this->Admin_model->GelombangOtomatis();
             $nourut = substr($dariDB, 2, 4);
-
-
             $idsekarang = $nourut + 1;
-            //  print_r($idsekarang); die;
             $data['kd_gelombang'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -856,7 +792,6 @@ class Admin extends CI_Controller
 
 
             $idsekarang = $nourut + 1;
-            //    print_r($nourut); die;
             $data['kd_soal_tes'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -946,21 +881,13 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('kd_standar_kelulusan', 'Kode Standar', 'required');
         $this->form_validation->set_rules('nilai', 'Nilai', 'required');
         $this->form_validation->set_rules('kd_ujian', 'Ujian', 'required');
-
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
-        //  $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-
         if ($this->form_validation->run() == FALSE) {
-
             $dariDB = $this->Admin_model->StandarOtomatis();
             $nourut = substr($dariDB, 3, 4);
-
-
             $idsekarang = $nourut + 1;
-            //    print_r($nourut); die;
             $data['kd_standar_kelulusan'] = $idsekarang;
-
             $this->load->view('templates/admin/header');
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/topbar');
@@ -968,13 +895,11 @@ class Admin extends CI_Controller
             $this->load->view('templates/admin/footer');
         } else {
             $post = $this->input->post();
-
             $data = [
                 "kd_standar_kelulusan" => $post['kd_standar_kelulusan'],
                 "kd_ujian" => $post['kd_ujian'],
                 "nilai" => $post['nilai']
             ];
-
             $this->db->insert('standar_kelulusan', $data);
             $this->session->set_flashdata('flash', 'Berhasil ditambahkan');
             redirect('admin/standar_kelulusan_data');
@@ -1051,19 +976,15 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
         $this->form_validation->set_rules('kd_gelombang', 'Gelombang', 'required');
-        // $this->form_validation->set_rules('kd_maba','Kode Calon Maba','required');
         $this->form_validation->set_rules('kd_tahun_ajaran', 'Tahun Ajaran', 'required');
 
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
-        //  $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
         if ($this->form_validation->run() == FALSE) {
 
             $dariDB = $this->Admin_model->jadwalOtomatis();
-            // $nourut = substr($dariDB, 2, 4);
             $idsekarang = is_null($dariDB) ? 1 : substr($dariDB, 2, 4) + 1;
-            //   print_r($nourut); die;
             $data['kd_jadwal'] = $idsekarang;
 
             $this->load->view('templates/admin/header');
@@ -1258,10 +1179,7 @@ class Admin extends CI_Controller
 
     public function calon_maba()
     {
-        //  $data['keuskupan'] = $this->db->get('asal_keuskupan')->result_array();
         $data['CalonMaba'] = $this->Admin_model->Maba();
-
-
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');
         $this->load->view('templates/admin/topbar');

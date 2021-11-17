@@ -19,9 +19,6 @@ class Maba extends CI_Controller
 
   public function index()
   {
-
-    // $user = $this->session->userdata('id_login');
-    // print_r($user); die;
     $data['user'] = $this->Maba_model->userLogin();
     $this->load->view('templates/maba/header');
     $this->load->view('templates/maba/sidebar', $data);
@@ -36,7 +33,6 @@ class Maba extends CI_Controller
   {
     $data['tahun_ajaran'] = $this->db->get('tahun_ajaran')->result_array();
     $data['gelombang'] = $this->db->get('gelombang')->result_array();
-    // $this->form_validation->set_rules('kd_login','Kode Maba','required');
     $this->form_validation->set_rules('kd_maba', 'Kode Maba', 'required');
     $this->form_validation->set_rules('nama', 'Nama', 'required');
     $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
@@ -46,8 +42,6 @@ class Maba extends CI_Controller
     $this->form_validation->set_rules('kd_keuskupan', 'Keuskupan', 'required');
     $this->form_validation->set_rules('kd_gelombang', 'Gelombang', 'required');
     $this->form_validation->set_rules('kd_tahun_ajaran', 'Tahun Ajaran', 'required');
-    // $this->form_validation->set_rules('berkas','Berkas','required');
-
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
     $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -55,32 +49,17 @@ class Maba extends CI_Controller
     if ($this->form_validation->run() == FALSE) {
 
       $user = $this->session->userdata('kd_maba');
-      //  $nama = $this->session->userdata('nama');
-      //  print_r($user); die;
       $data['kd_maba'] = $user;
-      // $data['user'] = $nama;
-
-      // $dariDB = $this->Maba_model->kdOtomatis();
-      // $nourut = substr($dariDB, 3, 4);
-      // $idsekarang = $nourut + 1;
-      // $data['kd_maba'] = $idsekarang;
-
       $data['kodeTahun'] = $this->Maba_model->kodeTahun();
-
       $data['keuskupan'] = $this->db->get('asal_keuskupan')->result_array();
       $user = $this->session->userdata('kd_maba');
       $data['kondisiRegistrasi'] = $this->Maba_model->kondisiRegistrasi();
-      // print'<pre>';
-      // print_r($user); die;
-      //   $data['user'] = $this->Maba_model->userLogin();
       $this->load->view('templates/maba/header');
       $this->load->view('templates/maba/sidebar', $data);
       $this->load->view('templates/maba/topbar');
       $this->load->view('maba/daftar', $data);
       $this->load->view('templates/maba/footer');
     } else {
-
-
       $ktp = $_FILES['ktp'];
       if ($ktp = '') {
       } else {
@@ -96,8 +75,6 @@ class Maba extends CI_Controller
           $ktp = $this->upload->data('file_name');
         }
       }
-
-
       $kartu_keluarga = $_FILES['kartu_keluarga'];
       if ($kartu_keluarga = '') {
       } else {
@@ -114,8 +91,6 @@ class Maba extends CI_Controller
           $kartu_keluarga = $this->upload->data('file_name');
         }
       }
-
-
       $surat_baptis = $_FILES['surat_baptis'];
       if ($surat_baptis = '') {
       } else {
@@ -131,8 +106,6 @@ class Maba extends CI_Controller
           $surat_baptis = $this->upload->data('file_name');
         }
       }
-
-
       $ijazah = $_FILES['ijazah'];
       if ($ijazah = '') {
       } else {
@@ -148,18 +121,9 @@ class Maba extends CI_Controller
           $ijazah = $this->upload->data('file_name');
         }
       }
-
-
       $post = $this->input->post();
-
-      //  print'<pre>';
-      //  print_r($post); die;
-
-
-
       $data = [
         "kd_maba" => $post['kd_maba'],
-        //  "id_login" => $post['id_login'],   
         "nama" => $post['nama'],
         "tempat_lahir" => $post['tempat_lahir'],
         "tanggal_lahir" => $post['tanggal_lahir'],
@@ -173,9 +137,6 @@ class Maba extends CI_Controller
         "kd_gelombang" => $post['kd_gelombang'],
         "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
       ];
-
-      //  print'<pre>';
-      //  print_r($data); die;
       $this->db->where('kd_maba', $post['kd_maba']);
       $result = $this->db->update('data_diri', $data);
       if($result){
@@ -197,33 +158,22 @@ class Maba extends CI_Controller
 
   public function ujian()
   {
-    //  $user = $this->session->userdata('kd_maba');
-    //   print_r($user); die;
     $user = $this->session->userdata('kd_maba');
     $data['user'] = $this->Maba_model->userLogin();
-
     $this->db->select('*');
     $this->db->from('data_diri');
-    //  $this->db->join('data_diri','data_diri.id_login=login_.id_login');
-    // $this->db->join('jadwal','jadwal.kd_maba=data_diri.kd_maba');
     $this->db->where('kd_maba', $user);
     $query = $this->db->get()->result_array();
     $data['jam'] = date("G:i:s");
     $data['tanggalsistem'] = new DateTime(date("Y-m-d G:i:s"));
-
-    //jika status berkas valid maka tampilkan jadwal ujian
-    // error_reporting(0);
     if ($query != null) {
       if ($query[0]['status_berkas'] == 'valid') {
         $this->db->select('*');
         $this->db->from('ujian');
         $this->db->join('jadwal', 'jadwal.kd_ujian=ujian.kd_ujian');
         $this->db->join('soal_tes', 'soal_tes.kd_ujian=ujian.kd_ujian');
-        // $this->db->join('data_diri', 'data_diri.kd_maba=jadwal.kd_maba');
-        // $this->db->where('jadwal.kd_maba', $query[0]['kd_maba']);
         $this->db->group_by('jadwal.kd_ujian');
         $data['jadwal'] = $this->db->get()->result_array();
-        //  $jadwal = $this->db->get_where('jadwal',['kd_maba'=> $query[0]['kd_maba']])->result_array();
         $data['NoTes'] = $this->Maba_model->Notes();
         $data['maba'] = $this->Maba_model->getMabaById();
         $this->load->view('templates/maba/header');
@@ -241,8 +191,6 @@ class Maba extends CI_Controller
         $this->load->view('templates/maba/footer');
       }
     } else {
-      // $data['noNull'] = 'Anda belum mendaftar dan upload berkas';
-
       $this->load->view('templates/maba/header');
       $this->load->view('templates/maba/sidebar', $data);
       $this->load->view('templates/maba/topbar');

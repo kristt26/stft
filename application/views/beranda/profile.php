@@ -1,4 +1,3 @@
-<!-- BLOG -->
 <section class="blog section-padding">
     <div class="container">
         <br><br>
@@ -23,26 +22,27 @@
                 <h3 class="text-center">DATA DOSEN</h3>
             </div>
             <div class="card-body">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th style="width: 5%">No</th>
-                    <th style="width: 20%;">NIDN</th>
-                    <th style="width: 45%;">Nama Dosen</th>
-                    <th style="width: 30%;">Foto</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($dosen as $key => $value):?>
-                    <tr>
-                      <td><?= $key +1;?></td>
-                      <td><?= $value['nidn'];?></td>
-                      <td><?= $value['nama'];?></td>
-                      <td><img src="<?= base_url("assets/img/dosen/").$value['foto']?>" alt="" style="width: 50%;"></td>
-                    </tr>
-                  <?php endforeach;?>
-                </tbody>
-              </table>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">No</th>
+                            <th style="width: 20%;">NIDN</th>
+                            <th style="width: 45%;">Nama Dosen</th>
+                            <th style="width: 30%;">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($dosen as $key => $value):?>
+                        <tr>
+                            <td><?= $key +1;?></td>
+                            <td><?= $value['nidn'];?></td>
+                            <td><?= $value['nama'];?></td>
+                            <td><img src="<?= base_url("assets/img/dosen/").$value['foto']?>" alt=""
+                                    style="width: 50%;"></td>
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">

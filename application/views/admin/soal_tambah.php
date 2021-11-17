@@ -1,7 +1,5 @@
 
 <div class="content-wrapper">
-
-    <!-- Content Header (Page header) -->
     <div class="content-header bg-white mb-2">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -17,10 +15,6 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
         
@@ -40,7 +34,6 @@
                              <form action="" method="post">
                                 
                                 <div class="form-group <?php echo form_error('kd_soal_tes') ? 'has-error' : null ?>">
-                                    <!-- <label for="kd_keuskupan">KD Keuskupan</label> -->
                                     <input type="hidden" class="form-control" placeholder="KD Soal" name="kd_soal_tes" value="ST-<?php echo sprintf("%02s", $kd_soal_tes) ?>" readonly>
                                     <?php echo form_error('kd_soal_tes'); ?>
                                 </div>
@@ -76,7 +69,6 @@
             </div>
             </div>
         </div>
-        <!-- /.card --> 
     </section>
 </div>
 
