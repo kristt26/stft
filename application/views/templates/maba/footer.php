@@ -34,39 +34,47 @@
 <script src="<?= base_url() ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
 
 
-<script src="<?= base_url() ?>assets/dist/sweetalert2.all.min.js" ></script>
-<script src="<?= base_url() ?>assets/js/script.js" ></script>
+<script src="<?= base_url() ?>assets/dist/sweetalert2.all.min.js"></script>
+<script src="<?= base_url() ?>assets/js/script.js"></script>
 
 <script>
-  $(function () {
+$(function() {
     $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
+        "responsive": true,
+        "autoWidth": false,
     });
     $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
-  });
+});
 
 
-  $(function () {
+$(function() {
     // Summernote
     $('.textarea').summernote()
-  })
+})
+
+var flashLogin = $('.flash-login').data('login');
+// var flashLogin = $('.flash-login');
+// var a = 2;
+
+if (flashLogin) {
+    Swal.fire({
+        title: 'Info',
+        text: flashLogin,
+        icon: 'success',
+    });
+}
 
 
 //   $(document).on("click", "#validasi", function(){
 //     var kd_sm = $(this).data('vl');
 //     $("#modal-validasi #kd_soal_tes").val(kd_sm);
 //   })
-
-
-
-
-  </script>
+</script>

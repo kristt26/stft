@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.4.17-MariaDB)
-# Date: 2021-11-11 15:12:56
+# Date: 2021-11-16 12:53:43
 # Generator: MySQL-Front 6.0  (Build 2.20)
 
 
@@ -181,7 +181,7 @@ CREATE TABLE `jawaban` (
   `kd_soal_valid` varchar(5) NOT NULL,
   `jawaban` text NOT NULL,
   PRIMARY KEY (`kd_jawaban`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "jawaban"
