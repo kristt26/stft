@@ -26,7 +26,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('pesan', 'Login Berhasil');
                 redirect('admin');
             } else {
-                $this->session->set_flashdata('pesan', 'Password yang adan masukkan salah');
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
                 redirect('auth');
 
             }
@@ -40,7 +40,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('pesan', 'Login Berhasil');
                 redirect('bak');
             } else {
-                $this->session->set_flashdata('pesan', 'Password yang adan masukkan salah');
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
                 redirect('auth');
 
             }
@@ -53,7 +53,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('pesan', 'Login Berhasil');
                 redirect('keuskupan');
             } else {
-                $this->session->set_flashdata('pesan', 'Password yang adan masukkan salah');
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
                 redirect('auth');
 
             }
@@ -64,7 +64,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('pesan', 'Login Berhasil');
                 redirect('maba');
             } else {
-                $this->session->set_flashdata('pesan', 'Password yang adan masukkan salah');
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
                 redirect('auth');
             }
 
@@ -131,12 +131,7 @@ class Auth extends CI_Controller
             // print_r($data); die;
 
             $this->db->insert('data_diri', $data);
-            $message = array(
-                'message' => '<div class="alert alert-success">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Anda Telah Berhasil Mendaftar</div>',
-            );
-            $this->session->set_flashdata($message);
+            $this->session->set_flashdata('pesan', 'Pendaftaran Berhasil');
             redirect('auth/registrasi');
 
         }
