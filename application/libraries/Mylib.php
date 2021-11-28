@@ -12,7 +12,7 @@ class Mylib
     public function rest_kirim($telepon, $message)
     {
         $this->userkey = 't9w9i5ng9rzzmfo3hiz8';
-        $this->passkey = '4tj5fpxsngq2linvb91l';
+        $this->passkey = '291cdbec108082e9a9e9eea1';
         $this->telepon = $telepon;
         $this->message = $message;
         $this->url = "http://pendaftaran.zenziva.co.id/api/sendsms/";
