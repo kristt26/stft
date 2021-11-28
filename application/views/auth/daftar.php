@@ -101,7 +101,7 @@
         Swal.fire({
             title: 'Info',
             text: flashLogin,
-            icon: 'error',
+            icon: 'success',
         });
     }
     </script>

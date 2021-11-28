@@ -85,7 +85,6 @@ class Auth extends CI_Controller
     public function registrasi()
     {
         $data['keuskupan'] = $this->db->get('asal_keuskupan')->result_array();
-
         // $this->form_validation->set_rules('kd_login','Kode Maba','required');
         $this->form_validation->set_rules('nama', 'Nama Pengguna', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -98,44 +97,27 @@ class Auth extends CI_Controller
         $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
         $this->form_validation->set_message('is_unique', '%s kode prodi sudah ada');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-
         if ($this->form_validation->run() == false) {
-
             $data['kodeTahun'] = $this->Maba_model->kodeTahun();
-
             $dariDB = $this->Auth_model->LoginOtomatis();
             $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 4);
-
             error_reporting(0);
             $idsekarang = $nourut + 1;
             //  print_r($nourut); die;
             $data['kd_maba'] = $idsekarang;
-
             $this->load->view('auth/daftar', $data);
-
         } else {
             $post = $this->input->post();
-
             $data = [
                 "kd_maba" => $post['kd_maba'],
                 "nama" => $post['nama'],
                 "username" => $post['username'],
                 "password" => $post['password'],
-                //   "level" => 'mahasiswa'
-                // "jenis_kelamin" => $post['jenis_kelamin'],
-                // "no_hp" => $post['no_hp'],
-                // "kd_keuskupan" => $post['kd_keuskupan'],
             ];
-
-            // print'<pre>';
-            // print_r($data); die;
-
             $this->db->insert('data_diri', $data);
             $this->session->set_flashdata('pesan', 'Pendaftaran Berhasil');
             redirect('auth/registrasi');
-
         }
-
     }
 
     public function logout()
