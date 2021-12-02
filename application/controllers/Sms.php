@@ -52,14 +52,18 @@ class Sms extends CI_Controller
                 $this->mylib->rest_kirim($hp, $pesan);
                 break;
             case 'berkas':
-                $maba = $this->db->get_where('data_diri', ['kd_maba' => $kode])->row_array();
-                $pesan = "Status Berkas Anda: ". $maba['status_berkas'];
+                $maba = $this->db->get_where('daftar', ['kd_daftar' => $kode])->row_array();
+                if(is_null($maba['status_berkas'])){
+                    $pesan = "Status berkas anda belum di proses";
+                }else{
+                    $pesan = "Status Berkas Anda: ". $maba['status_berkas'];
+                }
                 $this->mylib->rest_kirim($hp, $pesan);
                 break;
 
             default:
                 
-                $pesan = "Format yang anda masukkan salah!!!\n\n<hasil><spasi><NO PENDAFTARAN>: Hasil Test\<berkas><spasi><NO PENDAFTARAN>: Status Berkas";
+                $pesan = "Format yang anda masukkan salah!!!\n\n1.<hasil><spasi><NO PENDAFTARAN>: Hasil Test\n2. <berkas><spasi><NO PENDAFTARAN>: Status Berkas";
                 $this->mylib->rest_kirim($hp, $pesan);
                 break;
         }

@@ -1125,7 +1125,7 @@ class Admin extends CI_Controller
                     "status_berkas" => $status,
                 ];
 
-                $this->db->where('kd_daftar', $id);
+                $this->db->where('kd_maba', $id);
                 $result = $this->db->update('daftar', $data);
                 if ($result) {
                     $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran anda telah di periksa dan Valid");

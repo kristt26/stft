@@ -36,8 +36,8 @@ class Mylib
     public function rest_read()
     {
         $this->userkey = 't9w9i5ng9rzzmfo3hiz8';
-        $this->passkey = '4tj5fpxsngq2linvb91l';
-        $this->url = "http://pendaftaran.zenziva.co.id/api/readsms/?userkey=t9w9i5ng9rzzmfo3hiz8&passkey=4tj5fpxsngq2linvb91l";
+        $this->passkey = '291cdbec108082e9a9e9eea1';
+        $this->url = "http://pendaftaran.zenziva.co.id/api/readsms/?userkey=t9w9i5ng9rzzmfo3hiz8&passkey=291cdbec108082e9a9e9eea1";
         $curlHandle = curl_init();
         curl_setopt($curlHandle, CURLOPT_URL, $this->url);
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);

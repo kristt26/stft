@@ -58,7 +58,8 @@ class Maba extends CI_Controller
             $this->db->update('daftar', ['status' => 0], ['kd_maba' => $this->session->userdata('kd_maba')]);
             $result = $this->db->insert('daftar', $data);
             if ($result) {
-                $this->mylib->rest_kirim($data['no_hp'], "No. Pendaftaran Anda: " . $post['kd_daftar']);
+                $biodata = $this->db->get_where('data_diri', ['kd_maba' => $this->session->userdata('kd_maba')])->row_array();
+                $this->mylib->rest_kirim($biodata['no_hp'], "No. Pendaftaran: " . $post['kd_daftar'] . "\nKode Calon Maba: ".$this->session->userdata('kd_maba'));
             }
             redirect('maba/daftar');
         }

@@ -73,9 +73,9 @@
                                         <span class="badge bg-danger">tidak valid</span>
 
                                         <?php } else {?>
-                                        <a href="<?=site_url('admin/proses_validasi/') . $cm['kd_daftar'] . '/' . 'valid'?>"
+                                        <a href="<?=site_url('admin/proses_validasi/') . $cm['kd_maba'] . '/' . 'valid'?>"
                                             class="btn btn-success btn-sm"><i class='fas fa-check'></i> valid</a>
-                                        <a href="<?=site_url('admin/proses_validasi/') . $cm['kd_daftar'] . '/' . 'no'?>"
+                                        <a href="<?=site_url('admin/proses_validasi/') . $cm['kd_maba'] . '/' . 'no'?>"
                                             class="btn btn-danger btn-sm"><i class='fas fa-times'></i> tidak valid</a>
                                         <?php }?>
 
