@@ -16,6 +16,7 @@ class Mylib
         $this->telepon = $telepon;
         $this->message = $message;
         $this->url = "http://pendaftaran.zenziva.co.id/api/sendsms/";
+        
         $curlHandle = curl_init();
         curl_setopt($curlHandle, CURLOPT_URL, $this->url);
         curl_setopt($curlHandle, CURLOPT_HEADER, 0);
