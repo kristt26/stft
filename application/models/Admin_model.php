@@ -380,12 +380,35 @@ class Admin_model extends CI_model
 
     public function Maba()
     {
-        $this->db->select('*');
-        $this->db->from('daftar');
-        $this->db->join('data_diri', 'data_diri.kd_maba=daftar.kd_maba');
-        $this->db->join('asal_keuskupan', 'asal_keuskupan.kd_keuskupan=data_diri.kd_keuskupan');
-        // $this->db->where('kd_standar_kelulusan', $id);
-        return $this->db->get()->result_array();
+        $data = $this->db->query("SELECT
+            `daftar`.*,
+            `gelombang`.`gelombang`,
+            `tahun_ajaran`.`tahun_ajaran`,
+            `data_diri`.`nama`,
+            `data_diri`.`username`,
+            `data_diri`.`password`,
+            `data_diri`.`tempat_lahir`,
+            `data_diri`.`tanggal_lahir`,
+            `data_diri`.`jenis_kelamin`,
+            `data_diri`.`no_hp`,
+            `data_diri`.`kd_keuskupan`,
+            `data_diri`.`ktp`,
+            `data_diri`.`kartu_keluarga`,
+            `data_diri`.`surat_baptis`,
+            `data_diri`.`ijazah`,
+            `data_diri`.`kd_tahun_ajaran` AS `kd_tahun_ajaran1`,
+            `data_diri`.`kd_gelombang` AS `kd_gelombang1`,
+            `asal_keuskupan`.`nama_keuskupan`,
+            `asal_keuskupan`.`alamat`
+        FROM
+            `daftar`
+            LEFT JOIN `gelombang` ON `gelombang`.`kd_gelombang` = `daftar`.`kd_gelombang`
+            LEFT JOIN `tahun_ajaran` ON `tahun_ajaran`.`kd_tahun_ajaran` =
+        `daftar`.`kd_tahun_ajaran`
+            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
+            LEFT JOIN `asal_keuskupan` ON `data_diri`.`kd_keuskupan` =
+        `asal_keuskupan`.`kd_keuskupan`")->result_array();
+        return $data;
     }
 
     public function tahunTerakhir()

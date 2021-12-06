@@ -41,6 +41,7 @@
                             <thead class="text-center">
                                 <tr>
                                     <th>No</th>
+                                    <th>Tahun/Gelombang</th>
                                     <th>Nama</th>
                                     <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
@@ -56,6 +57,7 @@
                                 <?php foreach ($CalonMaba as $cm): ?>
                                 <tr class="text-center">
                                     <td><?=$no++;?></td>
+                                    <td><?=$cm['tahun_ajaran'].' - '.$cm['gelombang'];?></td>
                                     <td><?=$cm['nama'];?></td>
                                     <td><?=$cm['tempat_lahir'];?></td>
                                     <td><?=tgl_indo($cm['tanggal_lahir'])?></td>
