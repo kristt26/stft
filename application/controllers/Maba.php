@@ -218,12 +218,11 @@ class Maba extends CI_Controller
         $user = $this->session->userdata('kd_maba');
         $data['user'] = $this->Maba_model->userLogin();
 
-        $this->db->select('*');
-        $this->db->from('data_diri');
-        $this->db->join('daftar', 'daftar.kd_maba=data_diri.kd_maba');
-        // $this->db->join('jadwal','jadwal.kd_maba=data_diri.kd_maba');
-        $this->db->where('data_diri.kd_maba', $user);
-        $query = $this->db->get()->result_array();
+        $query = $this->db->query("SELECT
+        *
+      FROM
+        `daftar`
+        LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`  WHERE data_diri.kd_maba = '$user' ORDER BY tanggal_daftar desc limit 1")->result_array();
         $data['jam'] = date("G:i:s");
         $data['tanggalsistem'] = new DateTime(date("Y-m-d G:i:s"));
 
@@ -250,7 +249,6 @@ class Maba extends CI_Controller
                         $this->load->view('maba/ujian', $data);
                         $this->load->view('templates/maba/footer');
                     } else {
-
                         $data['belum'] = 'Anda Telah Mendaftar, Login Lagi untuk melihat nomor tes anda Jika berkas anda valid';
                         $this->load->view('templates/maba/header');
                         $this->load->view('templates/maba/sidebar', $data);
