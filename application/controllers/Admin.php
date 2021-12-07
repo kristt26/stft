@@ -1024,20 +1024,17 @@ class Admin extends CI_Controller
         $this->db->join('jadwal', 'jadwal.kd_maba=data_diri.kd_maba');
         $this->db->join('ujian', 'ujian.kd_ujian=jadwal.kd_ujian');
         $this->db->where('status', "1");
+        $this->db->order_by('daftar.tanggal_daftar', 'DESC');
+        $this->db->group_by('daftar.kd_maba');
 
         $data['hasil'] = $this->db->get()->result_array();
         $data['maba'] = $this->db->query("SELECT
-            `data_diri`.*,
-            `daftar`.*,
-            `jawaban`.`kd_jawaban`,
-            `jawaban`.`kd_soal_valid`,
-            `jawaban`.`jawaban`
-            FROM
-            `data_diri`
-            LEFT JOIN `jawaban` ON `jawaban`.`kd_maba` = `data_diri`.`kd_maba`
-            LEFT JOIN `daftar` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
-            WHERE daftar.status='1'
-            GROUP BY data_diri.kd_maba")->result_array();
+            *
+        FROM
+            `daftar`
+            LEFT JOIN `jawaban` ON `jawaban`.`kd_maba` = `daftar`.`kd_maba`
+            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
+        GROUP BY daftar.kd_maba ORDER BY daftar.tanggal_daftar DESC ")->result_array();
 
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');
@@ -1064,12 +1061,13 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-    public function periksa_ujian($id, $kd_maba)
+    public function periksa_ujian($id, $kd_maba, $kd_daftar)
     {
 
         $data['periksa'] = $this->Admin_model->periksaSoal($id, $kd_maba);
         $data['kd_maba'] = $kd_maba;
         $data['kd_ujian'] = $id;
+        $data['kd_daftar'] = $kd_daftar;
 
         $dariDB = $this->Admin_model->hasilUjiankd();
         $nourut = is_null($dariDB) ? 0 : substr($dariDB, 3, 3);
@@ -1087,15 +1085,15 @@ class Admin extends CI_Controller
     public function input_hasil()
     {
         $post = $this->input->post();
-        // $data = [
-        //     "kd_hasil_ujian" => $post['kd_hasil_ujian'],
-        //     "kd_maba" => $post['kd_maba'],
-        //     "kd_ujian" => $post['kd_ujian'],
-        //     "nilai" => $post['nilai']
-        // ];
+        $data = [
+            "kd_hasil_ujian" => $post['kd_hasil_ujian'],
+            "kd_maba" => $post['kd_daftar'],
+            "kd_ujian" => $post['kd_ujian'],
+            "nilai" => $post['nilai']
+        ];
 
-        $this->db->insert('hasil_ujian', $post);
-        redirect('admin/hasil_lihat/' . $post['kd_maba']);
+        $this->db->insert('hasil_ujian', $data);
+        redirect('admin/hasil_lihat/' . $post['kd_daftar']);
         // redirect('admin/periksa_ujian/' . $post['kd_ujian'] .'/'. $post['kd_maba'] );
 
     }

@@ -311,7 +311,7 @@ class Admin_model extends CI_model
         $this->db->from('asal_keuskupan');
         $this->db->join('data_diri', 'data_diri.kd_keuskupan=asal_keuskupan.kd_keuskupan');
         $this->db->join('daftar', 'daftar.kd_maba=data_diri.kd_maba');
-        $this->db->where('kd_daftar', $kd_daftar);
+        $this->db->where('daftar.kd_daftar', $kd_daftar);
         return $this->db->get()->row_array();
 
         //  print'<pre>';
