@@ -1023,7 +1023,7 @@ class Admin extends CI_Controller
         $this->db->join('daftar', 'daftar.kd_maba=data_diri.kd_maba');
         $this->db->join('jadwal', 'jadwal.kd_maba=data_diri.kd_maba');
         $this->db->join('ujian', 'ujian.kd_ujian=jadwal.kd_ujian');
-        $this->db->where('status', "1");
+        $this->db->where('status_berkas', "valid");
         $this->db->order_by('daftar.tanggal_daftar', 'DESC');
         $this->db->group_by('daftar.kd_maba');
 
@@ -1031,10 +1031,10 @@ class Admin extends CI_Controller
         $data['maba'] = $this->db->query("SELECT
             *
         FROM
-            `daftar`
-            LEFT JOIN `jawaban` ON `jawaban`.`kd_maba` = `daftar`.`kd_maba`
-            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
-        GROUP BY daftar.kd_maba ORDER BY daftar.tanggal_daftar DESC ")->result_array();
+            `jawaban`
+            LEFT JOIN `daftar` ON `daftar`.`kd_daftar` = `jawaban`.`kd_maba`
+            LEFT JOIN `data_diri` ON `data_diri`.`kd_maba` = `daftar`.`kd_maba`
+        GROUP BY jawaban.kd_maba ORDER BY daftar.tanggal_daftar DESC ")->result_array();
 
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');
@@ -1064,7 +1064,7 @@ class Admin extends CI_Controller
     public function periksa_ujian($id, $kd_maba, $kd_daftar)
     {
 
-        $data['periksa'] = $this->Admin_model->periksaSoal($id, $kd_maba);
+        $data['periksa'] = $this->Admin_model->periksaSoal($id, $kd_daftar);
         $data['kd_maba'] = $kd_maba;
         $data['kd_ujian'] = $id;
         $data['kd_daftar'] = $kd_daftar;

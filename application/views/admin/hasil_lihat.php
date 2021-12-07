@@ -54,7 +54,7 @@
                         <?php foreach($jadwal as $jd) : ?>
                         <?php $this->db->select('*');
                       $this->db->from('hasil_ujian');
-                      $this->db->where('kd_maba',$maba['kd_maba']);
+                      $this->db->where('kd_maba',$maba['kd_daftar']);
                       $this->db->where('kd_ujian',$jd['kd_ujian']);
                       $db = $this->db->get()->result_array();
                   ?>

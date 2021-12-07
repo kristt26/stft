@@ -329,23 +329,27 @@ class Admin_model extends CI_model
         //     $this->db->where('soal_tes.kd_ujian',$id);
         //     $this->db->where('data_diri.kd_maba',$kd_maba);
         return $this->db->query("SELECT
-        `ujian`.*,
-        `soal_tes`.`kd_soal_tes`,
-        `soal_tes`.`soal`,
-        `validasi_soal_tes`.`kd_soal_valid`,
-        `validasi_soal_tes`.`status_validasi`,
-        `validasi_soal_tes`.`keterangan`,
-        `jawaban`.`kd_jawaban`,
-        `jawaban`.`jawaban`,
-        `data_diri`.*
+            `ujian`.*,
+            `soal_tes`.`kd_soal_tes`,
+            `soal_tes`.`soal`,
+            `validasi_soal_tes`.`kd_soal_valid`,
+            `validasi_soal_tes`.`status_validasi`,
+            `validasi_soal_tes`.`keterangan`,
+            `jawaban`.`kd_jawaban`,
+            `jawaban`.`jawaban`,
+            `data_diri`.*
         FROM
-        `ujian`
-        LEFT JOIN `soal_tes` ON `soal_tes`.`kd_ujian` = `ujian`.`kd_ujian`
-        LEFT JOIN `validasi_soal_tes` ON `validasi_soal_tes`.`kd_soal_tes` =
-            `soal_tes`.`kd_soal_tes`
-        LEFT JOIN `jawaban` ON `validasi_soal_tes`.`kd_soal_valid` =
-            `jawaban`.`kd_soal_valid`
-        LEFT JOIN `data_diri` ON `data_diri`.`kd_maba` = `jawaban`.`kd_maba` WHERE ujian.kd_ujian='$id' AND jawaban.kd_maba='$kd_maba'")->result_array();
+            `ujian`
+            LEFT JOIN `soal_tes` ON `soal_tes`.`kd_ujian` = `ujian`.`kd_ujian`
+            LEFT JOIN `validasi_soal_tes` ON `validasi_soal_tes`.`kd_soal_tes` =
+        `soal_tes`.`kd_soal_tes`
+            LEFT JOIN `jawaban` ON `validasi_soal_tes`.`kd_soal_valid` =
+        `jawaban`.`kd_soal_valid`
+            LEFT JOIN `daftar` ON `jawaban`.`kd_maba` = `daftar`.`kd_daftar`
+            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
+        WHERE
+            `ujian`.`kd_ujian` = '$id' AND
+            `jawaban`.`kd_maba` = '$kd_maba'")->result_array();
 
         // print'<pre>';
         // var_dump($query); die;
