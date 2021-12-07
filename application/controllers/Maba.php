@@ -219,10 +219,27 @@ class Maba extends CI_Controller
         $data['user'] = $this->Maba_model->userLogin();
 
         $query = $this->db->query("SELECT
-        *
-      FROM
-        `daftar`
-        LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`  WHERE data_diri.kd_maba = '$user' ORDER BY tanggal_daftar desc limit 1")->result_array();
+            `daftar`.*,
+            `data_diri`.`nama`,
+            `data_diri`.`username`,
+            `data_diri`.`password`,
+            `data_diri`.`tempat_lahir`,
+            `data_diri`.`tanggal_lahir`,
+            `data_diri`.`jenis_kelamin`,
+            `data_diri`.`no_hp`,
+            `data_diri`.`kd_keuskupan`,
+            `data_diri`.`ktp`,
+            `data_diri`.`kartu_keluarga`,
+            `data_diri`.`surat_baptis`,
+            `data_diri`.`ijazah`
+        FROM
+            `daftar`
+            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
+        WHERE
+            `data_diri`.`kd_maba` = '$user'
+        ORDER BY
+            `daftar`.`tanggal_daftar` DESC
+        LIMIT 1")->result_array();
         $data['jam'] = date("G:i:s");
         $data['tanggalsistem'] = new DateTime(date("Y-m-d G:i:s"));
 
@@ -232,15 +249,18 @@ class Maba extends CI_Controller
             foreach ($query as $key => $maba) {
                 if ($maba['status'] == '1') {
                     if ($maba['status_berkas'] == 'valid') {
-                        $this->db->select('*');
-                        $this->db->from('ujian');
-                        $this->db->join('jadwal', 'jadwal.kd_ujian=ujian.kd_ujian');
-                        $this->db->join('soal_tes', 'soal_tes.kd_ujian=ujian.kd_ujian');
-                        // $this->db->join('data_diri', 'data_diri.kd_maba=jadwal.kd_maba');
-                        // $this->db->where('jadwal.kd_maba', $maba[0]['kd_maba']);
-                        $this->db->group_by('jadwal.kd_ujian');
-                        $data['jadwal'] = $this->db->get()->result_array();
-                        //  $jadwal = $this->db->get_where('jadwal',['kd_maba'=> $maba[0]['kd_maba']])->result_array();
+                        $gel = $maba['kd_gelombang'];
+                        $ta = $maba['kd_tahun_ajaran'];
+                        $kd_daftar = $maba['kd_daftar'];
+                        $data['jadwal'] = $this->db->query("SELECT
+                            *
+                        FROM
+                            `jadwal`
+                            LEFT JOIN `ujian` ON `jadwal`.`kd_ujian` = `ujian`.`kd_ujian`
+                            LEFT JOIN `daftar` ON `daftar`.`kd_gelombang` = `jadwal`.`kd_gelombang` AND
+                        `daftar`.`kd_tahun_ajaran` = `jadwal`.`kd_tahun_ajaran`   
+                        WHERE
+                            jadwal.kd_gelombang = '$gel' AND jadwal.kd_tahun_ajaran = '$ta' AND kd_daftar = '$kd_daftar'")->result_array();
                         $data['NoTes'] = $this->Maba_model->Notes();
                         $data['maba'] = $this->Maba_model->getMabaById();
                         $this->load->view('templates/maba/header');
