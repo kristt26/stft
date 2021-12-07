@@ -289,12 +289,13 @@ class Maba extends CI_Controller
         }
     }
 
-    public function mulai_ujian($kd_ujian, $kd_maba, $kd_gelombang, $kd_tahun_ajaran)
+    public function mulai_ujian($kd_ujian, $kd_maba, $kd_gelombang, $kd_tahun_ajaran, $kd_daftar)
     {
         $data['user'] = $this->Maba_model->userLogin();
         $data['soal'] = $this->Maba_model->SoalTes($kd_ujian);
         $data['namaUjian'] = $this->db->get_where('ujian', ['kd_ujian' => $kd_ujian])->result_array();
         $data['kd_maba'] = $kd_maba;
+        $data['kd_daftar'] = $kd_daftar;
         $data['kd_ujian'] = $kd_ujian;
         $jadwal = $this->db->get_where("jadwal", ['kd_gelombang' => $kd_gelombang, 'kd_tahun_ajaran' => $kd_tahun_ajaran])->row_array();
         $data['tanggal'] = $jadwal['tanggal'] . 'T' . $jadwal['jam_selesai'];
@@ -323,7 +324,7 @@ class Maba extends CI_Controller
                 $ger = array(
                     "jawaban" => $post['jawaban'][$i],
                     "kd_soal_valid" => $post['kd_soal_valid'][$i],
-                    "kd_maba" => $post['kd_maba'],
+                    "kd_maba" => $post['kd_daftar'],
 
                 );
 

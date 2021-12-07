@@ -40,28 +40,29 @@
                             <div id="hasil" style="color:red"></div>
                         </div>
                         <!-- /.card-header -->
-                        
+
                         <!-- /.card-body -->
                     </div>
                     <div class="card-body">
-                            <?php $no = 1; ?>
-                            <form action="<?= site_url('maba/hasil'); ?>" method="post">
-                                <input type="hidden" name="kd_maba" value="<?= $kd_maba ?>">
-                                <?php foreach ($soal as $sl) : ?>
-                                <p><?= $no++ . ').  ' . $sl['soal']; ?></p>
-                                <textarea name="jawaban[]" id="" cols="130" rows="5"></textarea>
-                                <!-- <input type="text" name="jawaban[]"> -->
-                                <input type="hidden" name="kd_soal_valid[]" value="<?= $sl['kd_soal_valid']; ?>">
+                        <?php $no = 1; ?>
+                        <form action="<?= site_url('maba/hasil'); ?>" method="post">
+                            <input type="hidden" name="kd_maba" value="<?= $kd_maba ?>">
+                            <input type="hidden" name="kd_daftar" value="<?= $kd_daftar ?>">
+                            <?php foreach ($soal as $sl) : ?>
+                            <p><?= $no++ . ').  ' . $sl['soal']; ?></p>
+                            <textarea name="jawaban[]" id="" cols="130" rows="5"></textarea>
+                            <!-- <input type="text" name="jawaban[]"> -->
+                            <input type="hidden" name="kd_soal_valid[]" value="<?= $sl['kd_soal_valid']; ?>">
 
-                                <hr>
+                            <hr>
 
 
-                                <?php endforeach; ?>
-                                <button type="submit" class="btn btn-primary">Selesai</button>
+                            <?php endforeach; ?>
+                            <button type="submit" class="btn btn-primary">Selesai</button>
 
-                            </form>
+                        </form>
 
-                        </div>
+                    </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->

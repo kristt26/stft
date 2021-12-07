@@ -28,13 +28,16 @@ class Maba_model extends CI_model
         return $this->db->query("SELECT
             `data_diri`.*,
             `tahun_ajaran`.`tahun_ajaran`,
-            `gelombang`.`gelombang`
+            `gelombang`.`gelombang`,
+            daftar.kd_daftar
         FROM
             `data_diri`
             LEFT JOIN `tahun_ajaran` ON `tahun_ajaran`.`kd_tahun_ajaran` =
-            `data_diri`.`kd_tahun_ajaran`
+        `data_diri`.`kd_tahun_ajaran`
+            LEFT JOIN `daftar` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
             LEFT JOIN `gelombang` ON `gelombang`.`kd_gelombang` =
-            `data_diri`.`kd_gelombang` WHERE kd_maba='$kd_maba'")->row_array();
+        `data_diri`.`kd_gelombang`
+        WHERE data_diri.kd_maba='$kd_maba' group by daftar.kd_daftar order by daftar.tanggal_daftar desc LIMIT 1")->row_array();
     }
 
     public function NoTes()

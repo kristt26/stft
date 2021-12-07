@@ -78,6 +78,7 @@
         $ta = $jd['kd_tahun_ajaran'];
         $kd_maba = $user['kd_maba'];
         $kd_ujian = $jd['kd_ujian'];
+        $kd_daftar = $jd['kd_daftar'];
         $db = $this->db->query("SELECT
 			                    *
 			                  FROM
@@ -88,7 +89,7 @@
 			                      `soal_tes`.`kd_soal_tes` = `validasi_soal_tes`.`kd_soal_tes`
 			                    LEFT JOIN `ujian` ON `soal_tes`.`kd_ujian` = `ujian`.`kd_ujian`
 			                    LEFT JOIN `jadwal` ON `jadwal`.`kd_ujian` = `ujian`.`kd_ujian`
-			                  WHERE jadwal.kd_gelombang = '$gelombang' AND jadwal.kd_tahun_ajaran = '$ta' AND jawaban.kd_maba = '$kd_maba' AND ujian.kd_ujian = '$kd_ujian'")->result_array();
+			                  WHERE jadwal.kd_gelombang = '$gelombang' AND jadwal.kd_tahun_ajaran = '$ta' AND jawaban.kd_maba = '$kd_daftar' AND ujian.kd_ujian = '$kd_ujian'")->result_array();
         ?>
                                 <tr>
                                     <td><?=$no++;?></td>
@@ -98,7 +99,7 @@
                                     <td><?=$jd['jam_selesai']?></td>
                                     <td class="text-center">
                                         <?php if ($db == null) {?>
-                                        <a href="<?=site_url('maba/mulai_ujian/') . $jd['kd_ujian'] . '/' . $NoTes['kd_maba'] . '/' . $jd['kd_gelombang'] . '/' . $jd['kd_tahun_ajaran'];?>"
+                                        <a href="<?=site_url('maba/mulai_ujian/') . $jd['kd_ujian'] . '/' . $NoTes['kd_maba'] . '/' . $jd['kd_gelombang'] . '/' . $jd['kd_tahun_ajaran']. '/' . $maba['kd_daftar'];?>"
                                             class="btn btn-<?=($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'primary' : 'secondary'?> btn-sm <?=($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? '' : 'disabled'?>"><i
                                                 class="fas fa-edit"></i>
                                             <?=($waktumulai < $tanggalsistem && $waktuselesai > $tanggalsistem) ? 'Mulai Ujian' : ($waktuselesai < $tanggalsistem ? 'Ujian Telah Lewat' : 'Belum di Mulai')?></a>
