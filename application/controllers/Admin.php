@@ -933,7 +933,14 @@ class Admin extends CI_Controller
             $this->load->view('templates/admin/footer');
         } else {
             $post = $this->input->post();
-            $maba = $this->db->get_where("data_diri", ['kd_tahun_ajaran' => $post['kd_tahun_ajaran'], 'kd_gelombang' => $post['kd_gelombang']])->result_array();
+            $ta = $post['kd_tahun_ajaran'];
+            $gel = $post['kd_gelombang'];
+            $maba = $this->db->query("SELECT
+                *
+            FROM
+                `daftar`
+                LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba` WHERE daftar.kd_gelombang='$gel' AND daftar.kd_tahun_ajaran = '$ta' AND daftar.status_berkas='valid'")->result_array();
+            // $maba = $this->db->get_where("data_diri", ['kd_tahun_ajaran' => $post['kd_tahun_ajaran'], 'kd_gelombang' => $post['kd_gelombang']])->result_array();
             $data = [
                 "kd_jadwal" => $post['kd_jadwal'],
                 "kd_ujian" => $post['kd_ujian'],
@@ -1105,7 +1112,11 @@ class Admin extends CI_Controller
 
     public function proses_validasi($id = null, $status = null)
     {
-        $maba = $this->db->get_where('data_diri', ['kd_maba' => $id])->row_array();
+        $maba = $this->db->query("SELECT
+            *
+        FROM
+            `daftar`
+            LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba` WHERE kd_daftar = '$id' LIMIT 1")->row_array();
         if ($id != null & $status != null) {
             if ($status == 'no') {
 
@@ -1125,7 +1136,7 @@ class Admin extends CI_Controller
                     "status_berkas" => $status,
                 ];
 
-                $this->db->where('kd_maba', $id);
+                $this->db->where('kd_daftar', $id);
                 $result = $this->db->update('daftar', $data);
                 if ($result) {
                     $this->mylib->rest_kirim($maba['no_hp'], "Berkas persyaratan pendaftaran anda telah di periksa dan Valid");
