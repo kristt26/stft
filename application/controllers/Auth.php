@@ -44,10 +44,76 @@ class Auth extends CI_Controller
                 redirect('auth');
 
             }
-        } else if ($username == 'keuskupan') {
-            if ($password == 'keuskupan') {
+        } else if ($username == 'agast') {
+            if ($password == 'agast') {
                 $array = array(
+                    'id' => 'K-01',
                     'akses' => 'keuskupan',
+                    'nama' => 'Keuskupan Agats'
+                );
+                $this->session->set_userdata($array);
+                $this->session->set_flashdata('pesan', 'Login Berhasil');
+                redirect('keuskupan');
+            } else {
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
+                redirect('auth');
+
+            }
+
+        }else if ($username == 'timika') {
+            if ($password == 'timika') {
+                $array = array(
+                    'id' => 'K-02',
+                    'akses' => 'keuskupan',
+                    'nama' => 'Keuskupan Timika'
+                );
+                $this->session->set_userdata($array);
+                $this->session->set_flashdata('pesan', 'Login Berhasil');
+                redirect('keuskupan');
+            } else {
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
+                redirect('auth');
+
+            }
+
+        }else if ($username == 'merauke') {
+            if ($password == 'merauke') {
+                $array = array(
+                    'id' => 'K-03',
+                    'akses' => 'keuskupan',
+                    'nama' => 'Keuskupan Merauke'
+                );
+                $this->session->set_userdata($array);
+                $this->session->set_flashdata('pesan', 'Login Berhasil');
+                redirect('keuskupan');
+            } else {
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
+                redirect('auth');
+
+            }
+
+        }else if ($username == 'jayapura') {
+            if ($password == 'jayapura') {
+                $array = array(
+                    'id' => 'K-04',
+                    'akses' => 'keuskupan',
+                    'nama' => 'Keuskupan Jayapura'
+                );
+                $this->session->set_userdata($array);
+                $this->session->set_flashdata('pesan', 'Login Berhasil');
+                redirect('keuskupan');
+            } else {
+                $this->session->set_flashdata('pesan', 'Password yang anda masukkan salah');
+                redirect('auth');
+
+            }
+
+        }else if ($username == 'sorong') {
+            if ($password == 'sorong') {
+                $array = array(
+                    'id' => 'K-05',
+                    'akses' => 'keuskupan',
+                    'nama' => 'Keuskupan Manokwari-Sorong'
                 );
                 $this->session->set_userdata($array);
                 $this->session->set_flashdata('pesan', 'Login Berhasil');

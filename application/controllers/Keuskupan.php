@@ -32,7 +32,7 @@ class Keuskupan extends CI_Controller {
     public function hasil_tes()
     {
 
-        $data['Calonmaba'] = $this->Keuskupan_model->Maba();  
+        $data['Calonmaba'] = $this->Keuskupan_model->hasil();  
         $this->load->view('templates/keuskupan/header');
         $this->load->view('templates/keuskupan/sidebar');
         $this->load->view('templates/keuskupan/topbar');
