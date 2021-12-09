@@ -30,9 +30,9 @@
         <br><br>
         <div class="card">
             <div class="card-header bg-info">
-                <h3 class="card-title">Kode Calon Mahasiswa : <?= $maba['kd_maba']; ?> <br><br>
-                    Nama : <?= $maba['nama']; ?><br><br>
-                    Asal Keuskupan : <?= $maba['nama_keuskupan']; ?>
+                <h3 class="card-title">Kode Calon Mahasiswa : <?=$maba['kd_maba'];?> <br><br>
+                    Nama : <?=$maba['nama'];?><br><br>
+                    Asal Keuskupan : <?=$maba['nama_keuskupan'];?>
                 </h3>
 
             </div>
@@ -47,44 +47,39 @@
                             <th>Ujian</th>
                             <th>Status Ujian</th>
                             <th>Nilai</th>
+                            <th width="10%">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no= 1; ?>
-                        <?php foreach($jadwal as $jd) : ?>
-                        <?php $this->db->select('*');
-                      $this->db->from('hasil_ujian');
-                      $this->db->where('kd_maba',$maba['kd_daftar']);
-                      $this->db->where('kd_ujian',$jd['kd_ujian']);
-                      $db = $this->db->get()->result_array();
-                  ?>
+                        <?php $no = 1;?>
+                        <?php foreach ($jadwal as $jd): ?>
+                        <?php
+$this->db->select('hasil_ujian.*, (SELECT standar_kelulusan.nilai FROM standar_kelulusan WHERE standar_kelulusan.kd_ujian=hasil_ujian.kd_ujian) AS standar');
+$this->db->from('hasil_ujian');
+$this->db->where('kd_maba', $maba['kd_daftar']);
+$this->db->where('kd_ujian', $jd['kd_ujian']);
+$db = $this->db->get()->row_array();
+?>
 
                         <tr>
-                            <td><?= $no++; ?></td>
+                            <td><?=$no++;?></td>
 
-                            <td><?= $jd['nama_ujian']; ?></td>
-                            <td class="text-center">
+                            <td><?=$jd['nama_ujian'];?></td>
+                            <td class=" text-center">
                                 <!-- Jika null (jika tidak ada) -->
-                                <?php if($db==null) { ?>
-                                <a href="<?= site_url('admin/periksa_ujian/') . $jd['kd_ujian'] . '/' . $maba['kd_maba']. '/' . $maba['kd_daftar'];  ?>"
+                                <?php if ($db == null) {?>
+                                <a href="<?=site_url('admin/periksa_ujian/') . $jd['kd_ujian'] . '/' . $maba['kd_maba'] . '/' . $maba['kd_daftar'];?>"
                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Periksa</a> </p>
-                                <?php } else { ?>
+                                <?php } else {?>
 
                                 <button class="btn btn-success btn-sm"><i class="fas fa-check"></i> Sudah
                                     diperiksa</button>
-                                <?php } ?>
+                                <?php }?>
                             </td>
 
-                            <td>
-                                <!-- Jika tidak null (jika ada) -->
-                                <?php if($db!=null) { ?>
-                                <?php foreach($db as $ujianFix) : ?>
-                                <?= $ujianFix['nilai']; ?>
-                                <?php endforeach; ?>
-                                <?php } else { ?>
-                                ----
-                                <?php } ?>
-                            </td>
+                            <td><?=$db['nilai']?></td>
+                            <td class="<?=$db['nilai'] >= $db['standar'] ? 'bg-success' : 'bg-danger'?>">
+                                <?=$db['nilai'] >= $db['standar'] ? 'Lulus' : 'Tidak Lulus'?></td>
 
 
                         </tr>

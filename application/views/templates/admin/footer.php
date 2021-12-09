@@ -125,6 +125,15 @@ $(document).on("click", "#surat_baptis", function() {
 
 })
 
+$(document).on("click", "#rekomendasi", function() {
+    var rekomendasi = $(this).data('rekomendasi');
+    // console.log(kartu)
+
+
+    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + rekomendasi
+
+})
+
 
 
 

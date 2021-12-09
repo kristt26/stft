@@ -1050,6 +1050,7 @@ class Admin extends CI_Controller
         $data['maba'] = $this->Admin_model->NoUjianHasil($kd_daftar);
 
         $data['jadwal'] = $this->Admin_model->jadwalUjianHasil($data['maba']);
+        // $data['standar']
 
         // echo $tes['nama'];
         // print'<pre>';

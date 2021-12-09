@@ -59,7 +59,7 @@ class Maba extends CI_Controller
             $result = $this->db->insert('daftar', $data);
             if ($result) {
                 $biodata = $this->db->get_where('data_diri', ['kd_maba' => $this->session->userdata('kd_maba')])->row_array();
-                $this->mylib->rest_kirim($biodata['no_hp'], "No. Pendaftaran: " . $post['kd_daftar'] . "\nKode Calon Maba: ".$this->session->userdata('kd_maba'));
+                $this->mylib->rest_kirim($biodata['no_hp'], "No. Pendaftaran: " . $post['kd_daftar'] . "\nKode Calon Maba: " . $this->session->userdata('kd_maba'));
             }
             redirect('maba/daftar');
         }
@@ -145,6 +145,23 @@ class Maba extends CI_Controller
                     $kartu_keluarga = $this->upload->data('file_name');
                 }
             }
+            
+            $rekomendasi = $_FILES['rekomendasi'];
+            if ($rekomendasi = '') {
+            } else {
+                $config['upload_path'] = './assets/img/berkas';
+                $config['max_size'] = 2000;
+                $config['allowed_types'] = 'jpg|png|pdf|jpeg';
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('rekomendasi')) {
+                    echo "Upload rekomendasi Gagal";
+                    die();
+                } else {
+                    $rekomendasi = $this->upload->data('file_name');
+                }
+            }
 
             $surat_baptis = $_FILES['surat_baptis'];
             if ($surat_baptis = '') {
@@ -194,6 +211,7 @@ class Maba extends CI_Controller
                 "kd_keuskupan" => $post['kd_keuskupan'],
                 "ktp" => $ktp,
                 "kartu_keluarga" => $kartu_keluarga,
+                "rekomendasi" => $rekomendasi,
                 "surat_baptis" => $surat_baptis,
                 "ijazah" => $ijazah,
                 "kd_gelombang" => $post['kd_gelombang'],
@@ -258,7 +276,7 @@ class Maba extends CI_Controller
                             `jadwal`
                             LEFT JOIN `ujian` ON `jadwal`.`kd_ujian` = `ujian`.`kd_ujian`
                             LEFT JOIN `daftar` ON `daftar`.`kd_gelombang` = `jadwal`.`kd_gelombang` AND
-                        `daftar`.`kd_tahun_ajaran` = `jadwal`.`kd_tahun_ajaran`   
+                        `daftar`.`kd_tahun_ajaran` = `jadwal`.`kd_tahun_ajaran`
                         WHERE
                             jadwal.kd_gelombang = '$gel' AND jadwal.kd_tahun_ajaran = '$ta' AND kd_daftar = '$kd_daftar'")->result_array();
                         $data['NoTes'] = $this->Maba_model->Notes();
