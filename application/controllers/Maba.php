@@ -214,8 +214,8 @@ class Maba extends CI_Controller
                 "rekomendasi" => $rekomendasi,
                 "surat_baptis" => $surat_baptis,
                 "ijazah" => $ijazah,
-                "kd_gelombang" => $post['kd_gelombang'],
-                "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
+                // "kd_gelombang" => $post['kd_gelombang'],
+                // "kd_tahun_ajaran" => $post['kd_tahun_ajaran'],
             ];
 
             //  print'<pre>';
