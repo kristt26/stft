@@ -411,7 +411,7 @@ class Admin_model extends CI_model
         `daftar`.`kd_tahun_ajaran`
             LEFT JOIN `data_diri` ON `daftar`.`kd_maba` = `data_diri`.`kd_maba`
             LEFT JOIN `asal_keuskupan` ON `data_diri`.`kd_keuskupan` =
-        `asal_keuskupan`.`kd_keuskupan`")->result_array();
+        `asal_keuskupan`.`kd_keuskupan` ORDER BY daftar.status_berkas ASC")->result_array();
         return $data;
     }
 
