@@ -77,9 +77,11 @@ $db = $this->db->get()->row_array();
                                 <?php }?>
                             </td>
 
-                            <td><?=$db['nilai']?></td>
-                            <td class="<?=$db['nilai'] >= $db['standar'] ? 'bg-success' : 'bg-danger'?>">
-                                <?=$db['nilai'] >= $db['standar'] ? 'Lulus' : 'Tidak Lulus'?></td>
+                            <td><?= $db==null ? 0 : $db['nilai']?></td>
+                            <td
+                                class="<?=$db == null ? '' : ($db['nilai'] >= $db['standar'] ? 'bg-success' : 'bg-danger')?>">
+                                <?=$db == null ? 'Belum di periksa' : ($db['nilai'] >= $db['standar'] ? 'Lulus' : 'Tidak Lulus')?>
+                            </td>
 
 
                         </tr>
