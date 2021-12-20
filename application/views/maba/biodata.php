@@ -208,14 +208,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-8">
+                            <!-- <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="rekom">Surat Rekomendasi</label>
                                     <input type="file" class="form-control" name="rekomendasi" autocomplete="off"
                                         required>
 
                                 </div>
-                            </div>
+                            </div> -->
 
 
                         </div>

@@ -40,6 +40,29 @@ class Keuskupan extends CI_Controller {
         $this->load->view('templates/keuskupan/footer');
     }
 
+    public function upload()
+    {
+        $kd_maba = $this->input->post('kd_maba');
+        $rekomendasi = $_FILES['rekomendasi'];
+            if ($rekomendasi = '') {
+            } else {
+                $config['upload_path'] = './assets/img/berkas';
+                $config['max_size'] = 2000;
+                $config['allowed_types'] = 'jpg|png|pdf|jpeg|doc|docx';
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('rekomendasi')) {
+                    echo "Upload rekomendasi Gagal";
+                    die();
+                } else {
+                    $rekomendasi = $this->upload->data('file_name');
+                }
+            }
+        $result = $this->db->update('data_diri', ['rekomendasi'=>$rekomendasi],['kd_maba'=>$kd_maba]);
+        redirect('keuskupan/laporan_maba');
+    }
+
 
 
 

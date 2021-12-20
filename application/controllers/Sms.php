@@ -33,22 +33,11 @@ class Sms extends CI_Controller
                     LEFT JOIN `ujian` ON `ujian`.`kd_ujian` = `standar_kelulusan`.`kd_ujian`")->result_array();
                 $hasil = $this->db->get_where('hasil_ujian', ['kd_maba' => $kode])->result_array();
                 $pesan = "";
-                foreach ($standar as $key1 => $value1) {
-                    $cek = false;
-                    foreach ($hasil as $key2 => $value2) {
-                        if ($value1['kd_ujian'] == $value2['kd_ujian']) {
-                            $cek = true;
-                            if ($value1['nilai'] <= $value2['nilai']) {
-                                $pesan =  $pesan . $value1['nama_ujian'] . " : Lulus\n";
-                            } else {
-                                $pesan =  $pesan.$value1['nama_ujian'] . " : Tidak Lulus\n";
-                            }
-                        }
-                    }
-                    if($cek==false){
-                        $pesan = $pesan.$value1['nama_ujian'] . " : Belum Mengikuti Ujian\n";
-                    }
+                $nilai = 0;
+                foreach ($hasil as $key2 => $value2) {
+                    $nilai += $value2['nilai'];
                 }
+                $pesan = count($hasil)==0 ? 'Anda belum mengikuti Ujian' : ($nilai/count($hasil)>=60 ? 'Anda lulus dengan hasil ujian: '.$nilai/count($hasil) : "Anda tidak lulus dengan hasil ujian: ".$nilai/count($hasil));
                 $this->mylib->rest_kirim($hp, $pesan);
                 break;
             case 'berkas':

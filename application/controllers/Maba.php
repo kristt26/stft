@@ -146,22 +146,22 @@ class Maba extends CI_Controller
                 }
             }
             
-            $rekomendasi = $_FILES['rekomendasi'];
-            if ($rekomendasi = '') {
-            } else {
-                $config['upload_path'] = './assets/img/berkas';
-                $config['max_size'] = 2000;
-                $config['allowed_types'] = 'jpg|png|pdf|jpeg';
-                $config['encrypt_name'] = true;
-                $this->load->library('upload', $config);
+            // $rekomendasi = $_FILES['rekomendasi'];
+            // if ($rekomendasi = '') {
+            // } else {
+            //     $config['upload_path'] = './assets/img/berkas';
+            //     $config['max_size'] = 2000;
+            //     $config['allowed_types'] = 'jpg|png|pdf|jpeg';
+            //     $config['encrypt_name'] = true;
+            //     $this->load->library('upload', $config);
 
-                if (!$this->upload->do_upload('rekomendasi')) {
-                    echo "Upload rekomendasi Gagal";
-                    die();
-                } else {
-                    $rekomendasi = $this->upload->data('file_name');
-                }
-            }
+            //     if (!$this->upload->do_upload('rekomendasi')) {
+            //         echo "Upload rekomendasi Gagal";
+            //         die();
+            //     } else {
+            //         $rekomendasi = $this->upload->data('file_name');
+            //     }
+            // }
 
             $surat_baptis = $_FILES['surat_baptis'];
             if ($surat_baptis = '') {
@@ -211,7 +211,6 @@ class Maba extends CI_Controller
                 "kd_keuskupan" => $post['kd_keuskupan'],
                 "ktp" => $ktp,
                 "kartu_keluarga" => $kartu_keluarga,
-                "rekomendasi" => $rekomendasi,
                 "surat_baptis" => $surat_baptis,
                 "ijazah" => $ijazah,
                 // "kd_gelombang" => $post['kd_gelombang'],
