@@ -27,7 +27,7 @@ class Bak extends CI_Controller {
             $nourut = substr($dariDB, 3, 4);
             
             
-            $idsekarang = $nourut + 1;
+            $idsekarang = (int)$nourut + 1;
             $data['kd_soal_tes'] = $idsekarang;
             
             $this->load->view('templates/bak/header');
