@@ -20,8 +20,8 @@ class Bak extends CI_Controller {
             $data['soal'] = $this->Bak_model->SoalJoin();
             $DBvalidasi = $this->Bak_model->ValidasiSoalId();
             $noValid = substr($DBvalidasi, 3, 4);
-            $kd_soal_valid = $noValid + 1;
-           $data['kd_soal_valid'] = $kd_soal_valid;
+            $kd_soal_valid = (int)$noValid + 1;
+            $data['kd_soal_valid'] = $kd_soal_valid;
 
             $dariDB = $this->Admin_model->SoalOtomatis();
             $nourut = substr($dariDB, 3, 4);
