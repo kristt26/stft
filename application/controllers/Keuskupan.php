@@ -19,7 +19,7 @@ class Keuskupan extends CI_Controller {
     public function laporan_maba()
     {
 
-        $data['Calonmaba'] = $this->Keuskupan_model->Maba();
+        $data['Calonmaba'] = $this->Keuskupan_model->datamaba();
         $this->load->view('templates/keuskupan/header');
         $this->load->view('templates/keuskupan/sidebar');
         $this->load->view('templates/keuskupan/topbar');
@@ -47,7 +47,7 @@ class Keuskupan extends CI_Controller {
             if ($rekomendasi = '') {
             } else {
                 $config['upload_path'] = './assets/img/berkas';
-                $config['max_size'] = 2000;
+                $config['max_size'] = 10000;
                 $config['allowed_types'] = 'jpg|png|pdf|jpeg|doc|docx';
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);

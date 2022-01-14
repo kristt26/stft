@@ -39,9 +39,23 @@ class Keuskupan_model extends CI_model
         $this->db->group_by('hasil_ujian.kd_maba');
         return $query = $this->db->get()->result_array();
 
-        print '<pre>';
-        var_dump($query);die;
+        // print '<pre>';
+        // var_dump($query);die;
 
+    }
+
+    public function datamaba()
+    {
+        $id = $this->session->userdata('id');
+
+        $this->db->select('*');
+        $this->db->from('asal_keuskupan');
+        $this->db->join('data_diri', 'data_diri.kd_keuskupan=asal_keuskupan.kd_keuskupan');
+        $this->db->where("data_diri.kd_keuskupan = ", $id);
+        return $query = $this->db->get()->result_array();
+
+        // print '<pre>';
+        // var_dump($query);die;
     }
 
 }
