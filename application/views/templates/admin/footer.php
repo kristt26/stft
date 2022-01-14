@@ -87,7 +87,8 @@ $(document).on("click", "#kk", function() {
     // console.log(kartu)
 
 
-    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + kartu
+    document.getElementById("kartuKel").src = "<?= base_url()?>" + "/assets/img/berkas/" +
+        kartu
 
 })
 
@@ -97,7 +98,8 @@ $(document).on("click", "#ktp", function() {
     // console.log(kartu)
 
 
-    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + ktp
+    document.getElementById("kartuKel").src = "<?= base_url()?>" + "/assets/img/berkas/" +
+        ktp
 
 })
 
@@ -109,7 +111,8 @@ $(document).on("click", "#ijazah", function() {
     // console.log(kartu)
 
 
-    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + ijazah
+    document.getElementById("kartuKel").src = "<?= base_url()?>" + "/assets/img/berkas/" +
+        ijazah
 
 })
 
@@ -121,7 +124,8 @@ $(document).on("click", "#surat_baptis", function() {
     // console.log(kartu)
 
 
-    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + surat_baptis
+    document.getElementById("kartuKel").src = "<?= base_url()?>" + "/assets/img/berkas/" +
+        surat_baptis
 
 })
 
@@ -130,7 +134,8 @@ $(document).on("click", "#rekomendasi", function() {
     // console.log(kartu)
 
 
-    document.getElementById("kartuKel").src = "http://localhost/stft/assets/img/berkas/" + rekomendasi
+    document.getElementById("kartuKel").src = "<?= base_url()?>" + "/assets/img/berkas/" +
+        rekomendasi
 
 })
 
