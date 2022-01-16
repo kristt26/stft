@@ -10,7 +10,7 @@ class Keuskupan_model extends CI_model
         return $query = $this->db->query("SELECT
          `daftar`.*,
          (select AVG(nilai) FROM hasil_ujian WHERE hasil_ujian.kd_maba=daftar.kd_daftar) AS nilai,
-         (select kd_ujian FROM hasil_ujian WHERE hasil_ujian.kd_maba=daftar.kd_daftar) AS kd_ujian,
+         (select kd_ujian FROM hasil_ujian WHERE hasil_ujian.kd_maba=daftar.kd_daftar limit 1) AS kd_ujian,
          `data_diri`.`nama`,
          `asal_keuskupan`.`nama_keuskupan`
       FROM
