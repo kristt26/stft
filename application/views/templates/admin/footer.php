@@ -57,8 +57,9 @@ var x = setInterval(function() {
         if (data.status == undefined) {
             data.msg.forEach(element => {
                 var kode = element.isiPesan.split(" ");
+                element.dari = element.dari.replace("+62", "0");
                 $.ajax({
-                    url: "<?=base_url("sms/kirim/");?>" + kode[0] + "/" + kode[1] +
+                    url: "<?=base_url("sms/");?>" + kode[0] + "/" + kode[1] +
                         "/" + element.dari,
                     context: document.body
                 }).done(function(x) {

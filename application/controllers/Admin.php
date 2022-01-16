@@ -25,6 +25,8 @@ class Admin extends CI_Controller
         $this->load->view('admin/index', $data);
         $this->load->view('templates/admin/footer');
     }
+    
+    
 
     public function lihat_berkas($id)
     {
