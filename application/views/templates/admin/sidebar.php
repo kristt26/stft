@@ -107,7 +107,7 @@
                          </p>
                      </a>
                  </li>
-                 <li class="nav-item">
+                 <!-- <li class="nav-item">
                      <a <?= $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'validasi_soal' | $this->uri->segment(2) == 'validasi_soal_ubah' ? 'class="nav-link active" style="background-color:orange;"' : 'class="nav-link"' ?>
                          href="<?= site_url('admin/validasi_soal'); ?>">
                          <i class="nav-icon fas fa-check-circle"></i>
@@ -115,7 +115,7 @@
                              Validasi Soal Tes
                          </p>
                      </a>
-                 </li>
+                 </li> -->
 
                  <!-- <li class="nav-item">
                      <a <?=$this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'validasi_soal_data' || $this->uri->segment(2) == 'validasi_soal_ubah' ? 'class="nav-link active" style="background-color:orange;"' : 'class="nav-link"'?>
