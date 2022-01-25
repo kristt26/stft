@@ -142,7 +142,7 @@
 
                                     <button type="button" class="btn btn-primary" id="rekomendasi"
                                         data-rekomendasi="<?=$maba['rekomendasi']?>" data-toggle="modal"
-                                        data-target=".bd-example-modal-lg">Lihat Surat Baptis</button>
+                                        data-target=".bd-example-modal-lg">Lihat Rekomendasi</button>
                                 </div>
 
                             </div>

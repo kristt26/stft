@@ -33,6 +33,14 @@ class Keuskupan extends CI_Controller {
     {
 
         $data['Calonmaba'] = $this->Keuskupan_model->hasil();  
+        $data['ujian'] = $this->Admin_model->getUjian();
+        foreach ($data['Calonmaba'] as $key => $maba) {
+            $data['Calonmaba'][$key]['jadwal'] = $this->Admin_model->getUjian();
+            $set  = $data['Calonmaba'][$key]['jadwal'];
+            foreach ($set as $key1 => $ujian) {
+                $ujian->nilai = $this->Admin_model->getHasilUjian($ujian->kd_ujian, $maba['kd_daftar']);
+            }
+        }
         $this->load->view('templates/keuskupan/header');
         $this->load->view('templates/keuskupan/sidebar');
         $this->load->view('templates/keuskupan/topbar');

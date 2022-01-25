@@ -1030,13 +1030,47 @@ class Admin extends CI_Controller
         $this->db->group_by('daftar.kd_maba');
 
         $data['hasil'] = $this->db->get()->result_array();
+        $data['ujian'] = $this->Admin_model->getUjian();
         $data['maba'] = $this->db->query("SELECT
-            *
+            `daftar`.`tanggal_daftar`,
+            `daftar`.`kd_daftar`,
+            `daftar`.`kd_gelombang`,
+            `daftar`.`kd_tahun_ajaran`,
+            `daftar`.`status`,
+            `daftar`.`status_berkas`,
+            `data_diri`.`username`,
+            `data_diri`.`password`,
+            `data_diri`.`tempat_lahir`,
+            `data_diri`.`tanggal_lahir`,
+            `data_diri`.`jenis_kelamin`,
+            `data_diri`.`nama`,
+            `data_diri`.`no_hp`,
+            `data_diri`.`kd_keuskupan`,
+            `data_diri`.`ktp`,
+            `data_diri`.`kartu_keluarga`,
+            `data_diri`.`surat_baptis`,
+            `data_diri`.`ijazah`,
+            `data_diri`.`rekomendasi`,
+            `jawaban`.`kd_jawaban`,
+            `jawaban`.`kd_soal_valid`,
+            `jawaban`.`jawaban`,
+            `data_diri`.`kd_maba`
         FROM
             `jawaban`
             LEFT JOIN `daftar` ON `daftar`.`kd_daftar` = `jawaban`.`kd_maba`
             LEFT JOIN `data_diri` ON `data_diri`.`kd_maba` = `daftar`.`kd_maba`
-        GROUP BY jawaban.kd_maba ORDER BY daftar.tanggal_daftar DESC ")->result_array();
+        GROUP BY
+            `jawaban`.`kd_maba`
+        ORDER BY
+            `daftar`.`tanggal_daftar` DESC")->result_array();
+        foreach ($data['maba'] as $key => $maba) {
+            $data['maba'][$key]['jadwal'] = $this->Admin_model->getUjian();
+            $set  = $data['maba'][$key]['jadwal'];
+            foreach ($set as $key1 => $ujian) {
+                $ujian->nilai = $this->Admin_model->getHasilUjian($ujian->kd_ujian, $maba['kd_daftar']);
+            }
+            $data['maba'][$key]['total_nilai'] = $this->Admin_model->totalnilai($maba['kd_daftar']);
+        }
 
         $this->load->view('templates/admin/header');
         $this->load->view('templates/admin/sidebar');

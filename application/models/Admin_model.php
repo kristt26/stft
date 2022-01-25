@@ -304,6 +304,50 @@ class Admin_model extends CI_model
         // $this->db->join('data_diri','data_diri.kd_maba=jadwal.kd_maba');
         // $this->db->join('tahun_ajaran','tahun_ajaran.kd_tahun_ajaran=jadwal.kd_tahun_ajaran');
     }
+    
+    public function UjianHasil($maba)
+    {
+        $this->db->select('*');
+        $this->db->from('ujian');
+        $this->db->join('jadwal', 'jadwal.kd_ujian=ujian.kd_ujian');
+        $this->db->join('hasil_ujian', 'hasil_ujian.kd_ujian=ujian.kd_ujian');
+        $this->db->where('kd_gelombang', $maba['kd_gelombang']);
+        $this->db->where('kd_tahun_ajaran', $maba['kd_tahun_ajaran']);
+        $this->db->where('hasil_ujian.kd_maba', $maba['kd_daftar']);
+        return $this->db->get()->result_array();
+        // $this->db->join('gelombang','gelombang.kd_gelombang=jadwal.kd_gelombang');
+        // $this->db->join('data_diri','data_diri.kd_maba=jadwal.kd_maba');
+        // $this->db->join('tahun_ajaran','tahun_ajaran.kd_tahun_ajaran=jadwal.kd_tahun_ajaran');
+    }
+    
+    public function getUjian()
+    {
+        return $this->db->get('ujian')->result();
+        // $this->db->join('gelombang','gelombang.kd_gelombang=jadwal.kd_gelombang');
+        // $this->db->join('data_diri','data_diri.kd_maba=jadwal.kd_maba');
+        // $this->db->join('tahun_ajaran','tahun_ajaran.kd_tahun_ajaran=jadwal.kd_tahun_ajaran');
+    }
+    
+    public function getHasilUjian($kd_ujian, $kd_maba)
+    {
+        $nilai = $this->db->where('kd_ujian', $kd_ujian)->where('kd_maba', $kd_maba)->get('hasil_ujian')->row();
+        if(!is_null($nilai))
+        {
+            return $nilai->nilai;
+        }
+        else{
+            return null;
+        }
+        // $this->db->join('gelombang','gelombang.kd_gelombang=jadwal.kd_gelombang');
+        // $this->db->join('data_diri','data_diri.kd_maba=jadwal.kd_maba');
+        // $this->db->join('tahun_ajaran','tahun_ajaran.kd_tahun_ajaran=jadwal.kd_tahun_ajaran');
+    }
+
+    public function totalnilai($kd_daftar)
+    {
+        $data = $this->db->query("select avg(nilai) as total from hasil_ujian where kd_maba='$kd_daftar'")->row_array();
+        return $data['total'];
+    }
 
     public function NoUjianHasil($kd_daftar)
     {

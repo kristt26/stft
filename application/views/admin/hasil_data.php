@@ -39,11 +39,19 @@
                         <table id="example1" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode Pendaftaran</th>
-                                    <th>Kode Calon Mahasiswa Baru</th>
-                                    <th>Nama</th>
-                                    <th>Aksi</th>
+                                    <th rowspan='2'>No</th>
+                                    <th rowspan='2'>Kode Pendaftaran</th>
+                                    <th rowspan='2'>Kode Calon Mahasiswa Baru</th>
+                                    <th rowspan='2'>Nama</th>
+                                    <th class="text-center" colspan='<?= count($ujian)?>'>Ujian</th>
+                                    <th rowspan='2'>Rata-rata</th>
+                                    <th rowspan='2'>Keterangan</th>
+                                    <th rowspan='2'>Aksi</th>
+                                </tr>
+                                <tr>
+                                    <?php foreach($ujian as $item):?>
+                                    <th><?= $item->nama_ujian?></th>
+                                    <?php endforeach;?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,12 +65,16 @@
                                     <td><?=$mb['kd_maba'];?></td>
                                     <?php $db = $this->db->get_where('data_diri', ['kd_maba' => $mb['kd_maba']])->result_array();?>
                                     <td><?=$db[0]['nama'];?></td>
+                                    <?php foreach($mb['jadwal'] as $jadwal):?>
+                                    <td><?= $jadwal->nilai?></td>
+                                    <?php endforeach;?>
+                                    <td><?=$mb['total_nilai'];?></td>
+                                    <td><?=$mb['total_nilai']== null ? '':($mb['total_nilai']>60 ? 'Lulus' : ('Tidak Lulus'));?>
+                                    </td>
                                     <td>
                                         <a href="<?=site_url('admin/hasil_lihat/') . $mb['kd_daftar'];?>"
                                             class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Lihat Hasil
                                             Ujian</a>
-
-
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
